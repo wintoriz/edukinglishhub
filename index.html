@@ -75,7 +75,6 @@
   </main>
 
   <script>
-    // Base de datos sincronizada desde Google Sheets
     const exercisesData = {
       1: {
         title: "Módulo 1: Greetings & Introductions",
@@ -107,6 +106,7 @@
     let currentDay = 1;
     let currentExIndex = 0;
     let pts = 0;
+    let isSolved = false;
 
     function renderNav() {
       const nav = document.getElementById('module-nav');
@@ -135,7 +135,9 @@
     }
 
     function updateUI() {
-      // Update Day Buttons
+      isSolved = false;
+      selectedWords = [];
+      
       [1, 2, 3].forEach(d => {
         const b = document.getElementById(`btn-day-${d}`);
         if (d === currentDay) {
@@ -145,7 +147,6 @@
         }
       });
 
-      // Render Dots
       const dots = document.getElementById('exercise-dots');
       dots.innerHTML = '';
       const dayExercises = (exercisesData[currentModule] && exercisesData[currentModule][currentDay]) || [];
@@ -161,6 +162,20 @@
       renderExercise();
     }
 
+    function nextExercise() {
+      const dayExercises = (exercisesData[currentModule] && exercisesData[currentModule][currentDay]) || [];
+      if (currentExIndex < dayExercises.length - 1) {
+        currentExIndex++;
+        updateUI();
+      } else if (currentDay < 3) {
+        currentDay++;
+        currentExIndex = 0;
+        updateUI();
+      } else {
+        alert("¡Felicidades! Has completado todos los ejercicios de este módulo 🎉");
+      }
+    }
+
     function playAudio(text) {
       if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
@@ -174,7 +189,7 @@
       const dayExercises = (exercisesData[currentModule] && exercisesData[currentModule][currentDay]) || [];
 
       if (!dayExercises || dayExercises.length === 0) {
-        container.innerHTML = `<div class="text-center py-12"><p class="text-slate-400 font-bold">Llenando contenidos en Google Sheets para este módulo...</p></div>`;
+        container.innerHTML = `<div class="text-center py-12"><p class="text-slate-400 font-bold">Contenido en preparación para este módulo en Google Sheets...</p></div>`;
         return;
       }
 
@@ -196,8 +211,8 @@
 
       if (ex.type === 'Multiple Choice' || ex.type === 'Listening' || ex.type === 'Fill in the Blanks') {
         html += `<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">`;
-        ex.options.forEach(opt => {
-          html += `<button onclick="checkAnswer('${opt.replace(/'/g, "\\'")}', '${ex.a.replace(/'/g, "\\'")}', '${ex.fb.replace(/'/g, "\\'")}')" class="opt-btn p-4 rounded-xl border-2 border-slate-200 font-bold text-slate-700 hover:border-indigo-400 hover:bg-indigo-50/50 transition-all text-left">${opt}</button>`;
+        ex.options.forEach((opt, idx) => {
+          html += `<button id="btn-opt-${idx}" onclick="checkOption(this, '${opt.replace(/'/g, "\\'")}', '${ex.a.replace(/'/g, "\\'")}', '${ex.fb.replace(/'/g, "\\'")}')" class="opt-btn p-4 rounded-xl border-2 border-slate-200 font-bold text-slate-700 hover:border-indigo-400 hover:bg-indigo-50/50 transition-all text-left">${opt}</button>`;
         });
         html += `</div>`;
       } else if (ex.type === 'Sentence Unscramble') {
@@ -221,20 +236,27 @@
                    </div>`;
         });
         html += `</div>`;
-        html += `<button onclick="checkAnswer('match', 'match', '${ex.fb.replace(/'/g, "\\'")}')" class="bg-indigo-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-indigo-700 shadow-md">¡Comprendido!</button>`;
+        html += `<button onclick="checkOption(this, 'match', 'match', '${ex.fb.replace(/'/g, "\\'")}')" class="bg-indigo-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-indigo-700 shadow-md">¡Comprendido!</button>`;
       }
 
       html += `<div id="feedback" class="mt-6 hidden p-4 rounded-xl font-bold"></div>`;
+      html += `<div id="next-btn-container" class="mt-6 hidden text-right">
+                <button onclick="nextExercise()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-lg px-8 py-4 rounded-2xl shadow-lg transition-all transform hover:scale-105 inline-flex items-center gap-2">
+                  Siguiente Ejercicio ➔
+                </button>
+               </div>`;
 
       container.innerHTML = html;
     }
 
     let selectedWords = [];
     function addWord(w) {
+      if (isSolved) return;
       selectedWords.push(w);
       renderScrambleBox();
     }
     function clearWords() {
+      if (isSolved) return;
       selectedWords = [];
       renderScrambleBox();
     }
@@ -245,21 +267,40 @@
 
     function checkUnscramble(ans, fb) {
       const userStr = selectedWords.join(' ');
-      checkAnswer(userStr, ans, fb);
+      checkOption(null, userStr, ans, fb);
     }
 
-    function checkAnswer(user, correct, fb) {
+    function checkOption(btnElement, user, correct, fb) {
       const feedback = document.getElementById('feedback');
+      const nextBtnContainer = document.getElementById('next-btn-container');
+
       feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
 
       if (user === correct || user === 'match') {
+        // Respuesta Correcta
+        if (btnElement && btnElement.tagName === 'BUTTON' && user !== 'match') {
+          btnElement.className = "opt-btn p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-bold transition-all text-left shadow-sm";
+        }
+
         feedback.classList.add('bg-emerald-100', 'text-emerald-800');
-        feedback.innerHTML = `🎉 <strong>¡Correcto!</strong> ${fb}`;
-        pts += 10;
-        document.getElementById('pts-counter').innerText = `${pts} PTS`;
+        feedback.innerHTML = `🎉 <strong>¡Excelente! Respuesta correcta.</strong><br><span class="text-sm font-normal mt-1 block">${fb}</span>`;
+
+        if (!isSolved) {
+          pts += 10;
+          document.getElementById('pts-counter').innerText = `${pts} PTS`;
+          isSolved = true;
+        }
+
+        nextBtnContainer.classList.remove('hidden');
+
       } else {
+        // Respuesta Incorrecta (Permite seguir intentando)
+        if (btnElement) {
+          btnElement.className = "opt-btn p-4 rounded-xl border-2 border-rose-400 bg-rose-50 text-rose-800 font-bold transition-all text-left shadow-sm";
+        }
+
         feedback.classList.add('bg-rose-100', 'text-rose-800');
-        feedback.innerHTML = `❌ <strong>Casi lo logras.</strong> La respuesta correcta es: <u>${correct}</u>. <br><span class="text-xs font-normal mt-1 block">${fb}</span>`;
+        feedback.innerHTML = `❌ <strong>Inténtalo de nuevo.</strong> Esa opción no es correcta. ¡Selecciona otra opción!`;
       }
     }
 
