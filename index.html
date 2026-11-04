@@ -21,7 +21,7 @@
     </div>
     
     <p class="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-3">Módulos Nivel A1</p>
-    <nav class="space-y-1" id="module-nav">
+    <nav class="space-y-1 overflow-y-auto max-h-[calc(100vh-160px)]" id="module-nav">
       <!-- Generated via JS -->
     </nav>
   </aside>
@@ -75,32 +75,130 @@
   </main>
 
   <script>
+    const moduleTitles = {
+      1: "Módulo 1: Greetings & Introductions",
+      2: "Módulo 2: Numbers, Age & Colors",
+      3: "Módulo 3: Family & Pets",
+      4: "Módulo 4: School Supplies & Classroom Objects",
+      5: "Módulo 5: Daily Routines & Actions",
+      6: "Módulo 6: Likes, Dislikes & Food",
+      7: "Módulo 7: Animals & Abilities",
+      8: "Módulo 8: House & Rooms",
+      9: "Módulo 9: Clothes & Weather",
+      10: "Módulo 10: Town & Places"
+    };
+
+    const readingPassages = {
+      1: { title: "Lectura 1: Hello, Kingly!", text: "Hello! My name is Alex and I am a student. Kingly is my friendly teacher. We say good morning at school." },
+      2: { title: "Lectura 2: Leo's Birthday", text: "Today is Leo's birthday and he is ten years old. He has three blue balloons and seven red balloons. He is very happy." },
+      3: { title: "Lectura 3: Emma's Pet", text: "Emma lives with her mother and father. She has a small white cat named Snow. Her cat likes to play with a ball." },
+      4: { title: "Lectura 4: In the Classroom", text: "David opens his school bag on the desk. Inside the bag, there are four books and two yellow pencils. This is his favorite class." },
+      5: { title: "Lectura 5: Morning Routine", text: "Every day, Lucas wakes up at seven in the morning. He brushes his teeth and eats breakfast with his family. Then, he goes to school by bus." },
+      6: { title: "Lectura 6: Healthy Breakfast", text: "Sofia likes fresh fruit in the morning. She eats a red apple and drinks a glass of cold milk. She does not like soda." },
+      7: { title: "Lectura 7: Animals in the Wild", text: "Cheetahs and monkeys live in warm places. Cheetahs can run very fast on land. Monkeys can climb tall trees and jump between branches." },
+      8: { title: "Lectura 8: Where is Dogito?", text: "Dogito is not in the living room. Look, he is in the bedroom! He is sleeping under the bed next to his blue toy." },
+      9: { title: "Lectura 9: A Rainy Afternoon", text: "It is rainy and cold outside today. Carlos is wearing a warm coat and black boots. He holds a yellow umbrella." },
+      10: { title: "Lectura 10: Our Neighborhood", text: "Our town has a big green park and a modern library. The supermarket is next to the bakery. You can turn right to find the central park." }
+    };
+
     const exercisesData = {
       1: {
-        title: "Módulo 1: Greetings & Introductions",
         1: [
           { type: 'Multiple Choice', q: 'Select the correct greeting for 8:00 AM', options: ['Good morning', 'Good night', 'Goodbye'], a: 'Good morning', fb: 'Good morning se usa desde temprano hasta el mediodía.' },
           { type: 'Listening', q: 'Listen. Escucha el audio y selecciona la respuesta a: What\'s your name?', text: "What is your name?", options: ['My name is Alex', 'I am 10 years old', 'I\'m fine, thank you'], a: 'My name is Alex', fb: 'My name is... se usa para decir tu nombre.' },
           { type: 'Fill in the Blanks', q: 'Complete. Hello, my name ___ Kingly.', options: ['is', 'am', 'are'], a: 'is', fb: 'Usamos \'is\' con nombres singulares o He/She/It.' },
           { type: 'Sentence Unscramble', q: 'Unscramble. Ordena las palabras para decir \'Gusto en conocerte\'', words: ['meet', 'Nice', 'to', 'you'], a: 'Nice to meet you', fb: 'La forma correcta es: Nice + to + meet + you.' },
-          { type: 'Match Pairs', q: 'Relaciona el saludo en inglés con su significado', pairs: [{e: 'Good morning', s: 'Buenos días'}, {e: 'Goodbye', s: 'Adiós'}, {e: 'How are you?', s: '¿Cómo estás?'}], fb: '¡Excelente asociación de saludos básicos!' }
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la palabra que no pertenece al grupo: Saludos matutinos y de bienvenida', options: ['Good morning', 'Hello', 'Hi', 'Good night'], a: 'Good night', fb: 'Good night se usa para despedirse antes de ir a dormir.' }
         ],
         2: [
           { type: 'Multiple Choice', q: 'Select the correct greeting for 5:00 PM', options: ['Good afternoon', 'Good night', 'Goodbye'], a: 'Good afternoon', fb: 'Good afternoon se usa después de mediodía hasta antes que se ponga el sol.' },
           { type: 'Listening', q: 'Listen. Escucha el audio y selecciona la respuesta a: How are you?', text: "How are you?", options: ['My name is Alex', 'I am 10 years old', 'I\'m fine, thank you'], a: 'I\'m fine, thank you', fb: 'I\'m fine, thank you... se usa para responder a un saludo.' },
           { type: 'Fill in the Blanks', q: 'Complete. Hello, my name ___ Kingly.', options: ['is', 'am', 'are'], a: 'is', fb: 'Usamos \'is\' con nombres singulares o He/She/It.' },
           { type: 'Sentence Unscramble', q: 'Unscramble. Ordena las palabras para decir \'Él es Dogito\'', words: ['Dogito', 'He', 'is'], a: 'He is Dogito', fb: 'La forma correcta es: He + is + Dogito.' },
-          { type: 'Match Pairs', q: 'Relaciona el saludo en inglés con su significado', pairs: [{e: 'Good morning', s: 'Buenos días'}, {e: 'Goodbye', s: 'Adiós'}, {e: 'How are you?', s: '¿Cómo estás?'}], fb: '¡Excelente asociación de saludos básicos!' }
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la palabra que no pertenece al grupo:', options: ['Fine', 'Great', 'Good afternoon', 'Pencil'], a: 'Pencil', fb: 'Pencil (lápiz) es un útil escolar.' }
         ],
         3: [
-          { type: 'Multiple Choice', q: 'Choose / Elige el pronombre correcto para una niña (She / Ella): "___ is a doctor."', options: ['She', 'He', 'It'], a: 'She', fb: 'Usamos \'She\' para referirnos a una mujer o niña en singular.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona la forma correcta del verbo To Be: "They ___ my friends."', text: "They are my friends", options: ['are', 'is', 'am'], a: 'are', fb: 'Usamos \'are\' con los pronombres plurales como \'They\' y \'We\'.' },
+          { type: 'Multiple Choice', q: 'Choose / Elige el pronombre correcto para una niña: "___ is a doctor."', options: ['She', 'He', 'It'], a: 'She', fb: 'Usamos \'She\' para referirnos a una mujer o niña en singular.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona la forma correcta del verbo To Be: "They ___ my best friends."', text: "They are my best friends", options: ['are', 'is', 'am'], a: 'are', fb: 'Usamos \'are\' con pronombres plurales.' },
           { type: 'Fill in the Blanks', q: 'Complete / Completa: "I ___ a happy student."', options: ['am', 'is', 'are'], a: 'am', fb: 'El pronombre \'I\' (yo) siempre se conjuga con \'am\'.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras para formar la oración: "He is my teacher."', words: ['teacher', 'He', 'my', 'is'], a: 'He is my teacher', fb: 'La estructura básica en afirmativo es Sujeto (He) + Verbo (is) + Complemento (my teacher).' },
-          { type: 'Match Pairs', q: 'Match / Relaciona los pronombres con su traducción al español:', pairs: [{e: 'I', s: 'Yo'}, {e: 'You', s: 'Tú'}, {e: 'He', s: 'Él'}, {e: 'She', s: 'Ella'}], fb: '¡Genial! Aprendiste los pronombres personales básicos en inglés.' }
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "He is my teacher."', words: ['teacher', 'He', 'my', 'is'], a: 'He is my teacher', fb: 'Estructura: Sujeto (He) + Verbo (is) + Complemento.' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. Who is Kingly according to the text?', passage: "Hello! My name is Alex and I am a student. Kingly is my friendly teacher. We say good morning at school.", options: ['Alex\'s teacher', 'Alex\'s brother', 'A doctor'], a: 'Alex\'s teacher', fb: 'El texto indica claramente: \'Kingly is my friendly teacher\'.' }
+        ]
+      },
+      2: {
+        1: [
+          { type: 'Multiple Choice', q: 'Choose / Selecciona la escritura correcta del número 12 en inglés:', options: ['Twelve', 'Twenty', 'Two'], a: 'Twelve', fb: 'Twelve corresponde al número 12.' },
+          { type: 'Listening', q: 'Listen / Escucha el número y selecciona la cifra correspondiente: "Fifteen"', text: "Fifteen", options: ['15', '50', '5'], a: '15', fb: 'Fifteen es el número 15.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa la serie numérica: "Eight, nine, ten, ___ (11)."', options: ['eleven', 'seven', 'twelve'], a: 'eleven', fb: 'Después de ten (10) sigue eleven (11).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "I have three red apples."', words: ['three', 'apples', 'I', 'red', 'have'], a: 'I have three red apples', fb: 'Sujeto + Verbo + Cantidad + Color + Sustantivo.' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la palabra que no pertenece al grupo: Números en inglés', options: ['Seven', 'Twelve', 'Fifteen', 'Apple'], a: 'Apple', fb: 'Apple es una fruta, las demás son números.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: 'Choose / Elige la pregunta correcta para saber la edad de alguien:', options: ['How old are you?', 'How are you?', 'What is your name?'], a: 'How old are you?', fb: 'How old are you? se usa para preguntar la edad.' },
+          { type: 'Listening', q: 'Listen / Escucha la respuesta y elige la opción que dice: "I am ten years old."', text: "I am ten years old", options: ['I am ten years old', 'I have ten years', 'I am two years old'], a: 'I am ten years old', fb: 'En inglés se usa el verbo To Be (\'I am...\') para la edad.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa la respuesta: "How old is Leo? - He ___ seven years old."', options: ['is', 'am', 'are'], a: 'is', fb: 'Usamos \'is\' porque el sujeto es \'He\'.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "I am nine years old."', words: ['old', 'years', 'am', 'nine', 'I'], a: 'I am nine years old', fb: 'Orden: Pronombre (I) + am + Número + years old.' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la opción incorrecta para responder a la edad:', options: ['I am eight years old', 'He is seven', 'I have nine years old', 'She is ten'], a: 'I have nine years old', fb: 'No se usa \'have\' para decir la edad en inglés.' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué color resulta al mezclar azul y amarillo? "Blue + Yellow = ___"', options: ['Green', 'Purple', 'Orange'], a: 'Green', fb: 'Blue (azul) + Yellow (amarillo) forman Green (verde).' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona el color del sol: "The sun is yellow."', text: "The sun is yellow", options: ['Yellow', 'Blue', 'Black'], a: 'Yellow', fb: 'Yellow significa amarillo.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa con el color de las frutillas: "Strawberries are ___."', options: ['red', 'green', 'white'], a: 'red', fb: 'Las frutillas maduras son rojas (red).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "My favorite color is blue."', words: ['blue', 'favorite', 'My', 'is', 'color'], a: 'My favorite color is blue', fb: 'My favorite color + is + blue.' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. How old is Leo today?', passage: "Today is Leo's birthday and he is ten years old. He has three blue balloons and seven red balloons. He is very happy.", options: ['Ten years old', 'Seven years old', 'Three years old'], a: 'Ten years old', fb: 'El texto dice: \'he is ten years old\'.' }
+        ]
+      },
+      3: {
+        1: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Cómo se dice \'madre\' en inglés?', options: ['Mother', 'Father', 'Brother'], a: 'Mother', fb: 'Mother significa madre.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona a quién presenta la oración: "This is my brother."', text: "This is my brother", options: ['Mi hermano', 'Mi papá', 'Mi abuelo'], a: 'Mi hermano', fb: 'Brother significa hermano.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "My father\'s sister is my ___ (tía)."', options: ['aunt', 'sister', 'mother'], a: 'aunt', fb: 'La hermana de tu papá es tu tía (aunt).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "I love my family."', words: ['family', 'love', 'my', 'I'], a: 'I love my family', fb: 'Sujeto (I) + Verbo (love) + Complemento (my family).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el elemento que no pertenece al grupo de la familia:', options: ['Mother', 'Father', 'Sister', 'Teacher'], a: 'Teacher', fb: 'Teacher es una profesión, no un miembro de la familia.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué animal dice \'woof woof\'?', options: ['Dog', 'Cat', 'Fish'], a: 'Dog', fb: 'Dog es perro en inglés.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona la mascota mencionada: "I have a small cat."', text: "I have a small cat", options: ['Cat', 'Rabbit', 'Turtle'], a: 'Cat', fb: 'Cat significa gato.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "A gold___ swims in the bowl."', options: ['fish', 'bird', 'dog'], a: 'fish', fb: 'Goldfish es pez dorado.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "My dog is very cute."', words: ['cute', 'very', 'My', 'is', 'dog'], a: 'My dog is very cute', fb: 'My dog + is + very cute.' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la mascota que no puede volar:', options: ['Parrot', 'Canary', 'Dog', 'Bird'], a: 'Dog', fb: 'Dog (perro) no es un ave y no puede volar.' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: 'Choose / Elige el adjetivo posesivo para él: "This is Lucas. That is ___ dog."', options: ['his', 'her', 'my'], a: 'his', fb: 'Usamos \'his\' para pertenencia de un varón.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona el posesivo para ella: "Emma is playing with ___ cat."', text: "Emma is playing with her cat", options: ['her', 'his', 'your'], a: 'her', fb: 'Usamos \'her\' para la posesión femenina.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "What is ___ name? - My name is Carlos."', options: ['your', 'our', 'their'], a: 'your', fb: 'Pregunta directa a la segunda persona: your.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "Her cat is white."', words: ['is', 'cat', 'Her', 'white'], a: 'Her cat is white', fb: 'Posesivo (Her) + Sustantivo + Verbo + Adjetivo.' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. What pet does Emma have?', passage: "Emma lives with her mother and father. She has a small white cat named Snow. Her cat likes to play with a ball.", options: ['A white cat', 'A big dog', 'A small goldfish'], a: 'A white cat', fb: 'El texto menciona: \'She has a small white cat named Snow\'.' }
         ]
       }
     };
+
+    // Generador automático de respaldo para módulos 4 al 10 en caso de seleccionar un día
+    for (let m = 4; m <= 10; m++) {
+      exercisesData[m] = {
+        1: [
+          { type: 'Multiple Choice', q: `Select the key vocabulary for ${moduleTitles[m]}`, options: ['Option A', 'Option B', 'Option C'], a: 'Option A', fb: 'Respuesta correcta basada en el tema del módulo.' },
+          { type: 'Listening', q: 'Listen and select the correct term', text: `Welcome to ${moduleTitles[m]}`, options: ['Option A', 'Option B', 'Option C'], a: 'Option A', fb: 'Escuchaste la frase clave del día.' },
+          { type: 'Fill in the Blanks', q: 'Complete the missing word in the sentence.', options: ['is', 'are', 'am'], a: 'is', fb: 'Gramática correspondiente al nivel A1.' },
+          { type: 'Sentence Unscramble', q: 'Order the words correctly.', words: ['English', 'learn', 'I'], a: 'I learn English', fb: 'Sujeto + Verbo + Complemento.' },
+          { type: 'Odd One Out', q: 'Select the word that does not belong.', options: ['Word A', 'Word B', 'Word C', 'Different Word'], a: 'Different Word', fb: 'Identificaste la palabra intrusa.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: `Choose the correct option for ${moduleTitles[m]}`, options: ['Correct', 'Incorrect A', 'Incorrect B'], a: 'Correct', fb: '¡Excelente selección!' },
+          { type: 'Listening', q: 'Listen to the audio clip.', text: "Practice makes perfect", options: ['Practice', 'Study', 'Listen'], a: 'Practice', fb: 'Audio identificado con éxito.' },
+          { type: 'Fill in the Blanks', q: 'Fill in the blank space.', options: ['can', 'can\'t', 'do'], a: 'can', fb: 'Uso correcto del auxiliar.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble the sentence structure.', words: ['like', 'apples', 'I'], a: 'I like apples', fb: 'Estructura afirmativa correcta.' },
+          { type: 'Odd One Out', q: 'Select the odd element.', options: ['Item 1', 'Item 2', 'Item 3', 'Outsider'], a: 'Outsider', fb: '¡Muy bien clasificado!' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: `Final challenge for ${moduleTitles[m]}`, options: ['Answer 1', 'Answer 2', 'Answer 3'], a: 'Answer 1', fb: '¡Dominas este tema!' },
+          { type: 'Listening', q: 'Listen to the conversation snippet.', text: "Good job student", options: ['Good job', 'Bad job', 'Hello'], a: 'Good job', fb: 'Comprensión auditiva comprobada.' },
+          { type: 'Fill in the Blanks', q: 'Complete the summary phrase.', options: ['am', 'is', 'are'], a: 'is', fb: 'Forma verbal correcta.' },
+          { type: 'Sentence Unscramble', q: 'Reorder the final phrase.', words: ['great', 'This', 'is'], a: 'This is great', fb: 'Orden sintáctico adecuado.' },
+          { type: 'Reading Comprehension', q: `Reading Comprehension. Question for ${moduleTitles[m]}`, passage: readingPassages[m] ? readingPassages[m].text : "Edukinglish helps students speak English with fun activities every day.", options: ['Option 1', 'Option 2', 'Option 3'], a: 'Option 1', fb: 'Comprensión de lectura verificada en el texto.' }
+        ]
+      };
+    }
 
     let currentModule = 1;
     let currentDay = 1;
@@ -113,7 +211,7 @@
       nav.innerHTML = '';
       for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
-        btn.className = `w-full text-left px-4 py-3 rounded-xl font-bold transition-all flex items-center justify-between ${i === currentModule ? 'bg-indigo-700 text-amber-400' : 'hover:bg-indigo-800 text-indigo-100'}`;
+        btn.className = `w-full text-left px-4 py-3 rounded-xl font-bold transition-all flex items-center justify-between mb-1 ${i === currentModule ? 'bg-indigo-700 text-amber-400' : 'hover:bg-indigo-800 text-indigo-100'}`;
         btn.innerHTML = `<span>Módulo ${i}</span> <span class="text-xs bg-indigo-950/50 px-2 py-1 rounded">15 Ej.</span>`;
         btn.onclick = () => selectModule(i);
         nav.appendChild(btn);
@@ -124,6 +222,7 @@
       currentModule = m;
       currentDay = 1;
       currentExIndex = 0;
+      document.getElementById('module-title').innerText = moduleTitles[m] || `Módulo ${m}`;
       renderNav();
       updateUI();
     }
@@ -172,7 +271,7 @@
         currentExIndex = 0;
         updateUI();
       } else {
-        alert("¡Felicidades! Has completado todos los ejercicios de este módulo 🎉");
+        alert("¡Felicidades! Has completado los ejercicios de este módulo 🎉");
       }
     }
 
@@ -189,7 +288,7 @@
       const dayExercises = (exercisesData[currentModule] && exercisesData[currentModule][currentDay]) || [];
 
       if (!dayExercises || dayExercises.length === 0) {
-        container.innerHTML = `<div class="text-center py-12"><p class="text-slate-400 font-bold">Contenido en preparación para este módulo en Google Sheets...</p></div>`;
+        container.innerHTML = `<div class="text-center py-12"><p class="text-slate-400 font-bold">Contenido en preparación para este módulo...</p></div>`;
         return;
       }
 
@@ -198,8 +297,17 @@
       let html = `<div class="mb-4 flex items-center justify-between">
                     <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md">${ex.type}</span>
                     <span class="text-xs font-bold text-slate-400">Ejercicio ${currentExIndex + 1} de 5</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-800 mb-6">${ex.q}</h3>`;
+                  </div>`;
+
+      if (ex.type === 'Reading Comprehension' || ex.passage) {
+        const passageText = ex.passage || (readingPassages[currentModule] ? readingPassages[currentModule].text : "");
+        html += `<div class="mb-6 p-4 bg-amber-50/80 border border-amber-200 rounded-xl">
+                  <span class="block text-xs font-extrabold uppercase text-amber-800 mb-1">📖 Lectura de Comprensión:</span>
+                  <p class="text-slate-700 italic font-medium leading-relaxed">"${passageText}"</p>
+                 </div>`;
+      }
+
+      html += `<h3 class="text-xl font-bold text-slate-800 mb-6">${ex.q}</h3>`;
 
       if (ex.type === 'Listening') {
         html += `<div class="mb-6 flex justify-center">
@@ -209,7 +317,7 @@
                  </div>`;
       }
 
-      if (ex.type === 'Multiple Choice' || ex.type === 'Listening' || ex.type === 'Fill in the Blanks') {
+      if (ex.type === 'Multiple Choice' || ex.type === 'Listening' || ex.type === 'Fill in the Blanks' || ex.type === 'Odd One Out' || ex.type === 'Reading Comprehension') {
         html += `<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">`;
         ex.options.forEach((opt, idx) => {
           html += `<button id="btn-opt-${idx}" onclick="checkOption(this, '${opt.replace(/'/g, "\\'")}', '${ex.a.replace(/'/g, "\\'")}', '${ex.fb.replace(/'/g, "\\'")}')" class="opt-btn p-4 rounded-xl border-2 border-slate-200 font-bold text-slate-700 hover:border-indigo-400 hover:bg-indigo-50/50 transition-all text-left">${opt}</button>`;
@@ -226,17 +334,6 @@
                   <button onclick="checkUnscramble('${ex.a.replace(/'/g, "\\'")}', '${ex.fb.replace(/'/g, "\\'")}')" class="bg-indigo-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-indigo-700 shadow-md">Comprobar</button>
                   <button onclick="clearWords()" class="bg-slate-200 text-slate-600 font-bold px-4 py-3 rounded-xl hover:bg-slate-300">Limpiar</button>
                  </div>`;
-      } else if (ex.type === 'Match Pairs') {
-        html += `<div class="space-y-3 mb-6">`;
-        ex.pairs.forEach(p => {
-          html += `<div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <span class="font-bold text-indigo-900">${p.e}</span>
-                    <span class="text-slate-400">➔</span>
-                    <span class="font-bold text-emerald-700">${p.s}</span>
-                   </div>`;
-        });
-        html += `</div>`;
-        html += `<button onclick="checkOption(this, 'match', 'match', '${ex.fb.replace(/'/g, "\\'")}')" class="bg-indigo-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-indigo-700 shadow-md">¡Comprendido!</button>`;
       }
 
       html += `<div id="feedback" class="mt-6 hidden p-4 rounded-xl font-bold"></div>`;
@@ -262,7 +359,9 @@
     }
     function renderScrambleBox() {
       const box = document.getElementById('scramble-box');
-      box.innerHTML = selectedWords.map(w => `<span class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-bold shadow-sm">${w}</span>`).join('');
+      if (box) {
+        box.innerHTML = selectedWords.map(w => `<span class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-bold shadow-sm">${w}</span>`).join('');
+      }
     }
 
     function checkUnscramble(ans, fb) {
@@ -276,9 +375,8 @@
 
       feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
 
-      if (user === correct || user === 'match') {
-        // Respuesta Correcta
-        if (btnElement && btnElement.tagName === 'BUTTON' && user !== 'match') {
+      if (user === correct) {
+        if (btnElement && btnElement.tagName === 'BUTTON') {
           btnElement.className = "opt-btn p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-bold transition-all text-left shadow-sm";
         }
 
@@ -294,7 +392,6 @@
         nextBtnContainer.classList.remove('hidden');
 
       } else {
-        // Respuesta Incorrecta (Permite seguir intentando)
         if (btnElement) {
           btnElement.className = "opt-btn p-4 rounded-xl border-2 border-rose-400 bg-rose-50 text-rose-800 font-bold transition-all text-left shadow-sm";
         }
