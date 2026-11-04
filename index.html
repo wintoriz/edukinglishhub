@@ -170,34 +170,169 @@
           { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "Her cat is white."', words: ['is', 'cat', 'Her', 'white'], a: 'Her cat is white', fb: 'Posesivo (Her) + Sustantivo (cat) + Verbo (is) + Adjetivo (white).' },
           { type: 'Reading Comprehension', q: 'Reading Comprehension. What pet does Emma have?', passage: "Emma lives with her mother and father. She has a small white cat named Snow. Her cat likes to play with a ball.", options: ['A white cat', 'A big dog', 'A small goldfish'], a: 'A white cat', fb: 'El texto menciona: \'She has a small white cat named Snow\' (Ella tiene un pequeño gato blanco llamado Snow).' }
         ]
-      }
-    };
-
-    for (let m = 4; m <= 10; m++) {
-      exercisesData[m] = {
+      },
+      4: {
         1: [
-          { type: 'Multiple Choice', q: `Select the key vocabulary for ${moduleTitles[m]}`, options: ['Option A', 'Option B', 'Option C'], a: 'Option A', fb: 'Respuesta correcta basada en el tema del módulo.' },
-          { type: 'Listening', q: 'Listen and select the correct term', text: `Welcome to ${moduleTitles[m]}`, options: ['Option A', 'Option B', 'Option C'], a: 'Option A', fb: 'Escuchaste la frase clave del día.' },
-          { type: 'Fill in the Blanks', q: 'Complete the missing word in the sentence.', options: ['is', 'are', 'am'], a: 'is', fb: 'Gramática correspondiente al nivel A1.' },
-          { type: 'Sentence Unscramble', q: 'Order the words correctly.', words: ['English', 'learn', 'I'], a: 'I learn English', fb: 'Sujeto + Verbo + Complemento.' },
-          { type: 'Odd One Out', q: 'Select the word that does not belong.', options: ['Word A', 'Word B', 'Word C', 'Different Word'], a: 'Different Word', fb: 'Identificaste la palabra intrusa.' }
+          { type: 'Multiple Choice', q: 'Choose / Elige el nombre del objeto escolar usado para escribir: "I write with a ___."', options: ['Pencil', 'Chair', 'Table'], a: 'Pencil', fb: 'Pencil significa lápiz.' },
+          { type: 'Listening', q: 'Listen / Escucha y elige el objeto mencionado: "This is my book."', text: "This is my book", options: ['Book', 'Ruler', 'Eraser'], a: 'Book', fb: 'Book significa libro.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "There are two ___ on the desk."', options: ['books', 'book', 'a book'], a: 'books', fb: 'Usamos la forma plural \'books\' con la cantidad \'two\'.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "The ruler is yellow."', words: ['yellow', 'is', 'The', 'ruler'], a: 'The ruler is yellow', fb: 'Sujeto (The ruler) + Verbo (is) + Adjetivo (yellow).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la palabra que no es un útil escolar:', options: ['Pencil', 'Notebook', 'Eraser', 'Dog'], a: 'Dog', fb: 'Dog (perro) es un animal, no un útil escolar.' }
         ],
         2: [
-          { type: 'Multiple Choice', q: `Choose the correct option for ${moduleTitles[m]}`, options: ['Correct', 'Incorrect A', 'Incorrect B'], a: 'Correct', fb: '¡Excelente selección!' },
-          { type: 'Listening', q: 'Listen to the audio clip.', text: "Practice makes perfect", options: ['Practice', 'Study', 'Listen'], a: 'Practice', fb: 'Audio identificado con éxito.' },
-          { type: 'Fill in the Blanks', q: 'Fill in the blank space.', options: ['can', 'can\'t', 'do'], a: 'can', fb: 'Uso correcto del auxiliar.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble the sentence structure.', words: ['like', 'apples', 'I'], a: 'I like apples', fb: 'Estructura afirmativa correcta.' },
-          { type: 'Odd One Out', q: 'Select the odd element.', options: ['Item 1', 'Item 2', 'Item 3', 'Outsider'], a: 'Outsider', fb: '¡Muy bien clasificado!' }
+          { type: 'Multiple Choice', q: 'Choose / Selecciona la palabra correcta para \'borrador\':', options: ['Eraser', 'Pen', 'Sharpener'], a: 'Eraser', fb: 'Eraser (o rubber) significa borrador o goma.' },
+          { type: 'Listening', q: 'Listen / Escucha: "Open your notebook."', text: "Open your notebook", options: ['Abre tu cuaderno', 'Abre la puerta', 'Cierra el libro'], a: 'Abre tu cuaderno', fb: 'Notebook significa cuaderno.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "I need a ___ to sharpen my pencil."', options: ['sharpener', 'chair', 'bag'], a: 'sharpener', fb: 'Sharpener significa tajador o sacapuntas.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "I have a blue backpack."', words: ['backpack', 'blue', 'a', 'have', 'I'], a: 'I have a blue backpack', fb: 'Sujeto (I) + Verbo (have) + Artículo/Adjetivo/Sustantivo (a blue backpack).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el mueble del salón de clases:', options: ['Desk', 'Pencil', 'Crayon', 'Marker'], a: 'Desk', fb: 'Desk (escritorio) es mobiliario, los demás son artículos de escribir.' }
         ],
         3: [
-          { type: 'Multiple Choice', q: `Final challenge for ${moduleTitles[m]}`, options: ['Answer 1', 'Answer 2', 'Answer 3'], a: 'Answer 1', fb: '¡Dominas este tema!' },
-          { type: 'Listening', q: 'Listen to the conversation snippet.', text: "Good job student", options: ['Good job', 'Bad job', 'Hello'], a: 'Good job', fb: 'Comprensión auditiva comprobada.' },
-          { type: 'Fill in the Blanks', q: 'Complete the summary phrase.', options: ['am', 'is', 'are'], a: 'is', fb: 'Forma verbal correcta.' },
-          { type: 'Sentence Unscramble', q: 'Reorder the final phrase.', words: ['great', 'This', 'is'], a: 'This is great', fb: 'Orden sintáctico adecuado.' },
-          { type: 'Reading Comprehension', q: `Reading Comprehension. Question for ${moduleTitles[m]}`, passage: readingPassages[m] ? readingPassages[m].text : "Edukinglish helps students speak English with fun activities every day.", options: ['Option 1', 'Option 2', 'Option 3'], a: 'Option 1', fb: 'Comprensión de lectura verificada en el texto.' }
+          { type: 'Multiple Choice', q: 'Choose / Selecciona el demostrativo singular para objetos cercanos: "___ is a pen."', options: ['This', 'These', 'Those'], a: 'This', fb: 'Usamos \'This\' para un objeto singular cercano.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona la traducción: "These are yellow pencils."', text: "These are yellow pencils", options: ['Estos son lápices amarillos', 'Este es un lápiz amarillo', 'Aquellos son lápices'], a: 'Estos son lápices amarillos', fb: 'These are se utiliza para plurales cercanos.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "___ is my teacher\'s desk."', options: ['That', 'Those', 'These'], a: 'That', fb: 'That se usa para señalar un objeto distante en singular.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "Those are my books."', words: ['my', 'are', 'books', 'Those'], a: 'Those are my books', fb: 'Demostrativo plural distante (Those) + verbo (are) + complemento (my books).' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. How many books are inside David\'s bag?', passage: "David opens his school bag on the desk. Inside the bag, there are four books and two yellow pencils. This is his favorite class.", options: ['Four books', 'Two books', 'Six books'], a: 'Four books', fb: 'La lectura dice: \'there are four books and two yellow pencils\' (hay cuatro libros y dos lápices amarillos).' }
         ]
-      };
-    }
+      },
+      5: {
+        1: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Cómo se dice \'despertarse\' en inglés?', options: ['Wake up', 'Go to sleep', 'Eat lunch'], a: 'Wake up', fb: 'Wake up significa despertarse.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona la acción: "I brush my teeth."', text: "I brush my teeth", options: ['Me lavo los dientes', 'Me lavo la cara', 'Desayuno'], a: 'Me lavo los dientes', fb: 'Brush my teeth significa lavarse o cepillarse los dientes.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Lucas ___ breakfast at 8:00 AM."', options: ['eats', 'eat', 'drinking'], a: 'eats', fb: 'Con He/She/It en presente simple agregamos -s al verbo (eats).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la rutina: "I wake up at seven."', words: ['at', 'seven', 'up', 'wake', 'I'], a: 'I wake up at seven', fb: 'Sujeto (I) + Verbo (wake up) + Hora (at seven).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la acción que NO es de la mañana:', options: ['Brush teeth', 'Wake up', 'Eat breakfast', 'Sleep at night'], a: 'Sleep at night', fb: 'Dormir por la noche (Sleep at night) no forma parte de la rutina matutina.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: 'Choose / Selecciona la forma correcta para He/She en presente simple: "She ___ to school by bus."', options: ['goes', 'go', 'going'], a: 'goes', fb: 'En tercera persona del singular (She), \'go\' cambia a \'goes\'.' },
+          { type: 'Listening', q: 'Listen / Escucha la frase: "He watches TV in the afternoon."', text: "He watches TV in the afternoon", options: ['Él ve televisión por la tarde', 'Él lee un libro', 'Él duerme por la tarde'], a: 'Él ve televisión por la tarde', fb: 'Watches TV significa ver televisión.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa la oración: "They ___ English every day."', options: ['study', 'studies', 'studying'], a: 'study', fb: 'Con \'They\' el verbo se mantiene en su forma base (study).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "She plays in the park."', words: ['in', 'plays', 'She', 'park', 'the'], a: 'She plays in the park', fb: 'Sujeto (She) + Verbo (plays) + Lugar (in the park).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la expresión de tiempo que no corresponde:', options: ['In the morning', 'In the afternoon', 'In the night', 'At night'], a: 'In the night', fb: 'La forma correcta en inglés es \'At night\', no \'In the night\'.' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: 'Choose / ¿A qué hora almuerzas generalmente? "I eat lunch at ___."', options: ['12:00 PM', '7:00 AM', '10:00 PM'], a: '12:00 PM', fb: 'Lunch es el almuerzo que ocurre al mediodía.' },
+          { type: 'Listening', q: 'Listen / Escucha la pregunta: "What time do you go to bed?"', text: "What time do you go to bed?", options: ['¿A qué hora te vas a la cama?', '¿A qué hora desayunas?', '¿A qué hora estudias?'], a: '¿A qué hora te vas a la cama?', fb: 'Go to bed significa irse a dormir o a la cama.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa la hora: "I take a shower ___ 7:30 AM."', options: ['at', 'on', 'in'], a: 'at', fb: 'Usamos la preposición \'at\' para horas específicas.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "I go to sleep at night."', words: ['at', 'night', 'go', 'I', 'to', 'sleep'], a: 'I go to sleep at night', fb: 'Sujeto (I) + Verbo (go to sleep) + Expresión de tiempo (at night).' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. How does Lucas go to school?', passage: "Every day, Lucas wakes up at seven in the morning. He brushes his teeth and eats breakfast with his family. Then, he goes to school by bus.", options: ['By bus', 'On foot', 'By car'], a: 'By bus', fb: 'El pasaje indica al final: \'Then, he goes to school by bus\' (Luego va a la escuela en autobús).' }
+        ]
+      },
+      6: {
+        1: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Cómo se dice \'manzana\' en inglés?', options: ['Apple', 'Banana', 'Orange'], a: 'Apple', fb: 'Apple significa manzana.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona la fruta: "I like bananas."', text: "I like bananas", options: ['Bananas', 'Apples', 'Grapes'], a: 'Bananas', fb: 'Bananas significa plátanos o bananas.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "I ___ fresh fruit for breakfast."', options: ['like', 'likes', 'liking'], a: 'like', fb: 'Con \'I\' usamos la forma base del verbo \'like\'.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la preferencia: "I like red apples."', words: ['like', 'apples', 'red', 'I'], a: 'I like red apples', fb: 'Sujeto (I) + Verbo (like) + Objeto (red apples).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el alimento que NO es una fruta:', options: ['Apple', 'Banana', 'Pizza', 'Orange'], a: 'Pizza', fb: 'Pizza es un plato preparado, no una fruta.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: 'Choose / Selecciona la respuesta negativa correcta: "Do you like soda? - No, I ___."', options: ['don\'t', 'doesn\'t', 'not'], a: 'don\'t', fb: 'Con \'I\' en respuestas cortas negativas usamos \'don\'t\'.' },
+          { type: 'Listening', q: 'Listen / Escucha la preferencia: "She doesn\'t like coffee."', text: "She doesn't like coffee", options: ['A ella no le gusta el café', 'A ella le gusta el café', 'Ella toma té'], a: 'A ella no le gusta el café', fb: 'Doesn\'t like expresa un disgusto en tercera persona.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "He ___ milk in the morning."', options: ['drinks', 'drink', 'drinking'], a: 'drinks', fb: 'Con \'He\' agregamos -s al verbo (drinks).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "We do not like soda."', words: ['like', 'not', 'do', 'soda', 'We'], a: 'We do not like soda', fb: 'Sujeto (We) + Auxiliar negativo (do not) + Verbo (like) + Objeto (soda).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la bebida saludable:', options: ['Milk', 'Water', 'Fruit juice', 'Soda'], a: 'Soda', fb: 'Soda (gaseosa) no se considera una bebida saludable frente al agua o leche.' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Cuál es una opción saludable para el desayuno?', options: ['Eggs and fruit', 'French fries', 'Candy'], a: 'Eggs and fruit', fb: 'Huevos y fruta es un desayuno nutritivo.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona: "Sofia drinks a glass of cold milk."', text: "Sofia drinks a glass of cold milk", options: ['Un vaso de leche fría', 'Un vaso de agua', 'Una taza de café caliente'], a: 'Un vaso de leche fría', fb: 'Glass of cold milk es un vaso de leche fría.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Do you ___ cheese? - Yes, I do."', options: ['eat', 'eats', 'eating'], a: 'eat', fb: 'Después del auxiliar \'do\', el verbo principal va en su forma base (eat).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "Fruit is good for health."', words: ['good', 'for', 'Fruit', 'is', 'health'], a: 'Fruit is good for health', fb: 'Sujeto (Fruit) + Verbo (is) + Adjetivo/Complemento (good for health).' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. What does Sofia drink for breakfast?', passage: "Sofia likes fresh fruit in the morning. She eats a red apple and drinks a glass of cold milk. She does not like soda.", options: ['Cold milk', 'Orange juice', 'Hot coffee'], a: 'Cold milk', fb: 'El texto afirma: \'drinks a glass of cold milk\' (bebe un vaso de leche fría).' }
+        ]
+      },
+      7: {
+        1: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué animal puede volar en el aire?', options: ['Bird', 'Fish', 'Dog'], a: 'Bird', fb: 'Bird significa ave o pájaro y puede volar.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona el animal salvaje: "The lion is strong."', text: "The lion is strong", options: ['Lion', 'Cat', 'Mouse'], a: 'Lion', fb: 'Lion significa león.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Monkeys can ___ tall trees."', options: ['climb', 'climbs', 'climbing'], a: 'climb', fb: 'Después del verbo modal \'can\', el verbo principal permanece sin cambios (climb).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la capacidad: "Birds can fly high."', words: ['fly', 'Birds', 'high', 'can'], a: 'Birds can fly high', fb: 'Sujeto (Birds) + Modal (can) + Verbo principal (fly) + Adverbio (high).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el animal acuático:', options: ['Fish', 'Dolphin', 'Whale', 'Monkey'], a: 'Monkey', fb: 'Monkey (mono) es un mamífero terrestre.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué verbo modal se usa para habilidades? "I ___ swim very well."', options: ['can', 'must', 'should'], a: 'can', fb: 'Can expresa habilidad o capacidad en presente.' },
+          { type: 'Listening', q: 'Listen / Escucha la oración negativa: "Penguins cannot fly."', text: "Penguins cannot fly", options: ['Los pingüinos no pueden volar', 'Los pingüinos vuelan alto', 'Los pingüinos nadan despacio'], a: 'Los pingüinos no pueden volar', fb: 'Cannot / Can\'t expresa imposibilidad o falta de habilidad.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Cheetahs ___ run very fast."', options: ['can', 'is', 'are'], a: 'can', fb: 'Can indica la habilidad del guepardo de correr rápido.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "Dolphins can swim fast."', words: ['swim', 'can', 'Dolphins', 'fast'], a: 'Dolphins can swim fast', fb: 'Sujeto (Dolphins) + Modal (can) + Verbo (swim) + Adverbio (fast).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la habilidad física:', options: ['Run', 'Jump', 'Swim', 'Pencil'], a: 'Pencil', fb: 'Pencil es un objeto, mientras que Run, Jump y Swim son acciones/habilidades.' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué animal corre más rápido en tierra?', options: ['Cheetah', 'Elephant', 'Turtle'], a: 'Cheetah', fb: 'Cheetah (guepardo) es el animal terrestre más veloz.' },
+          { type: 'Listening', q: 'Listen / Escucha: "Monkeys jump between branches."', text: "Monkeys jump between branches", options: ['Los monos saltan entre ramas', 'Los monos comen plátanos', 'Los monos duermen'], a: 'Los monos saltan entre ramas', fb: 'Jump between branches significa saltar entre ramas.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Eagles can ___ high in the sky."', options: ['fly', 'run', 'swim'], a: 'fly', fb: 'Fly es el verbo correcto para el vuelo de las águilas.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "Cheetahs can run fast."', words: ['fast', 'can', 'run', 'Cheetahs'], a: 'Cheetahs can run fast', fb: 'Sujeto (Cheetahs) + can + run + fast.' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. What can cheetahs do according to the text?', passage: "Cheetahs and monkeys live in warm places. Cheetahs can run very fast on land. Monkeys can climb tall trees and jump between branches.", options: ['Run very fast', 'Fly high in the sky', 'Swim in deep water'], a: 'Run very fast', fb: 'El texto especifica: \'Cheetahs can run very fast on land\' (Los guepardos pueden correr muy rápido en tierra).' }
+        ]
+      },
+      8: {
+        1: [
+          { type: 'Multiple Choice', q: 'Choose / ¿En qué habitación de la casa duermes?', options: ['Bedroom', 'Kitchen', 'Bathroom'], a: 'Bedroom', fb: 'Bedroom significa dormitorio o habitación.' },
+          { type: 'Listening', q: 'Listen / Escucha y selecciona el lugar: "Mom is in the kitchen."', text: "Mom is in the kitchen", options: ['Cocina', 'Jardín', 'Garaje'], a: 'Cocina', fb: 'Kitchen significa cocina.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "We watch TV in the living ___."', options: ['room', 'house', 'table'], a: 'room', fb: 'Living room significa sala de estar.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la ubicación: "Dogito is in the bedroom."', words: ['bedroom', 'is', 'in', 'Dogito', 'the'], a: 'Dogito is in the bedroom', fb: 'Sujeto (Dogito) + Verbo (is) + Preposición/Lugar (in the bedroom).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la habitación de la casa:', options: ['Kitchen', 'Bathroom', 'Bedroom', 'Supermarket'], a: 'Supermarket', fb: 'Supermarket es un comercio de la ciudad, no una parte de la casa.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: 'Choose / Selecciona la preposición para \'debajo de\':', options: ['Under', 'On', 'In'], a: 'Under', fb: 'Under significa debajo o debajo de.' },
+          { type: 'Listening', q: 'Listen / Escucha la posición: "The cat is on the sofa."', text: "The cat is on the sofa", options: ['El gato está sobre el sofá', 'El gato está debajo del sofá', 'El gato está en la cocina'], a: 'El gato está sobre el sofá', fb: 'On indica que el objeto o animal está sobre la superficie.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "The books are ___ the desk."', options: ['on', 'under', 'next'], a: 'on', fb: 'On se utiliza para objetos colocados sobre una mesa o escritorio.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "He is sleeping under the bed."', words: ['bed', 'under', 'is', 'sleeping', 'He', 'the'], a: 'He is sleeping under the bed', fb: 'Sujeto (He) + Verbo (is sleeping) + Preposición y lugar (under the bed).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la preposición de lugar:', options: ['Under', 'Next to', 'On', 'Jump'], a: 'Jump', fb: 'Jump es un verbo (saltar), mientras que las demás son preposiciones.' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué mueble se encuentra habitualmente en el dormitorio?', options: ['Bed', 'Stove', 'Shower'], a: 'Bed', fb: 'Bed (cama) es el mueble principal del dormitorio.' },
+          { type: 'Listening', q: 'Listen / Escucha: "Dogito is next to his blue toy."', text: "Dogito is next to his blue toy", options: ['Dogito está al lado de su juguete azul', 'Dogito está lejos de su juguete', 'Dogito no tiene juguetes'], a: 'Dogito está al lado de su juguete azul', fb: 'Next to significa al lado de.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Where ___ Dogito? - He is in the bedroom."', options: ['is', 'are', 'am'], a: 'is', fb: 'Usamos \'is\' para preguntar la ubicación de un sujeto singular (Dogito).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la respuesta: "He is next to the toy."', words: ['the', 'next', 'is', 'He', 'to', 'toy'], a: 'He is next to the toy', fb: 'Sujeto (He) + Verbo (is) + Preposición compuesta (next to) + Objeto (the toy).' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. Where is Dogito sleeping?', passage: "Dogito is not in the living room. Look, he is in the bedroom! He is sleeping under the bed next to his blue toy.", options: ['Under the bed', 'On the sofa', 'In the kitchen'], a: 'Under the bed', fb: 'El texto señala: \'He is sleeping under the bed next to his blue toy\' (Está durmiendo debajo de la cama).' }
+        ]
+      },
+      9: {
+        1: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué prenda de vestir usas en los pies?', options: ['Boots', 'Hat', 'Shirt'], a: 'Boots', fb: 'Boots (botas) o shoes (zapatos) se usan en los pies.' },
+          { type: 'Listening', q: 'Listen / Escucha la prenda de vestir: "He is wearing a coat."', text: "He is wearing a coat", options: ['Un abrigo', 'Un sombrero', 'Pantalones cortos'], a: 'Un abrigo', fb: 'Coat significa abrigo o casaca.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Carlos is wearing black ___ on his feet."', options: ['boots', 'coat', 'umbrella'], a: 'boots', fb: 'Boots (botas) se llevan en los pies.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "I wear a warm coat."', words: ['coat', 'wear', 'warm', 'I', 'a'], a: 'I wear a warm coat', fb: 'Sujeto (I) + Verbo (wear) + Complemento (a warm coat).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el objeto de vestir para días fríos:', options: ['Warm coat', 'Boots', 'Gloves', 'Shorts'], a: 'Shorts', fb: 'Shorts (pantalones cortos) se usan en clima cálido o de verano.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué tiempo atmosférico requiere usar paraguas?', options: ['Rainy', 'Sunny', 'Hot'], a: 'Rainy', fb: 'Rainy significa lluvioso.' },
+          { type: 'Listening', q: 'Listen / Escucha el clima: "It is rainy and cold today."', text: "It is rainy and cold today", options: ['Está lluvioso y frío hoy', 'Hace mucho calor y sol', 'Está nublado y caluroso'], a: 'Está lluvioso y frío hoy', fb: 'Rainy and cold indica lluvia y bajas temperaturas.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "He holds a yellow ___ to protect from rain."', options: ['umbrella', 'hat', 'shirt'], a: 'umbrella', fb: 'Umbrella significa paraguas o sombrilla.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "It is cold outside today."', words: ['outside', 'cold', 'is', 'It', 'today'], a: 'It is cold outside today', fb: 'Clima impersonal (It is) + Adjetivo (cold) + Lugar/Tiempo (outside today).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el adjetivo que describe clima:', options: ['Rainy', 'Cold', 'Sunny', 'Pencil'], a: 'Pencil', fb: 'Pencil es un útil escolar, los demás son adjetivos de clima.' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué ropa te pones cuando hace mucho calor en verano?', options: ['T-shirt and shorts', 'Coat and boots', 'Sweater and scarf'], a: 'T-shirt and shorts', fb: 'Camiseta (T-shirt) y pantalones cortos (shorts) son ideales para clima cálido.' },
+          { type: 'Listening', q: 'Listen / Escucha: "Carlos holds a yellow umbrella."', text: "Carlos holds a yellow umbrella", options: ['Carlos sostiene un paraguas amarillo', 'Carlos compra un paraguas azul', 'Carlos no tiene paraguas'], a: 'Carlos sostiene un paraguas amarillo', fb: 'Yellow umbrella significa paraguas amarillo.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "What is the weather like? - It is ___ (soleado)."', options: ['sunny', 'rainy', 'snowy'], a: 'sunny', fb: 'Sunny significa soleado.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la prenda: "She wears a yellow hat."', words: ['yellow', 'wears', 'She', 'hat', 'a'], a: 'She wears a yellow hat', fb: 'Sujeto (She) + Verbo (wears) + Objeto (a yellow hat).' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. What is Carlos wearing for the cold weather?', passage: "It is rainy and cold outside today. Carlos is wearing a warm coat and black boots. He holds a yellow umbrella.", options: ['A warm coat and boots', 'A t-shirt and shorts', 'A summer hat'], a: 'A warm coat and boots', fb: 'El pasaje explica: \'Carlos is wearing a warm coat and black boots\' (Carlos lleva puesto un abrigo abrigador y botas negras).' }
+        ]
+      },
+      10: {
+        1: [
+          { type: 'Multiple Choice', q: 'Choose / ¿En qué lugar de la ciudad compras alimentos?', options: ['Supermarket', 'Library', 'Park'], a: 'Supermarket', fb: 'Supermarket significa supermercado.' },
+          { type: 'Listening', q: 'Listen / Escucha el lugar público: "Our town has a big green park."', text: "Our town has a big green park", options: ['Un parque verde grande', 'Una biblioteca moderna', 'Un cine nuevo'], a: 'Un parque verde grande', fb: 'Big green park significa un gran parque verde.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "You can read books in the ___."', options: ['library', 'bakery', 'bank'], a: 'library', fb: 'Library significa biblioteca (lugar para leer o prestar libros).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "The park is green."', words: ['green', 'is', 'The', 'park'], a: 'The park is green', fb: 'Sujeto (The park) + Verbo (is) + Adjetivo (green).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el lugar de la ciudad:', options: ['Library', 'Supermarket', 'Bakery', 'Bedroom'], a: 'Bedroom', fb: 'Bedroom es una habitación de la casa, no un establecimiento urbano.' }
+        ],
+        2: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Dónde compras pan fresco y pasteles?', options: ['Bakery', 'Hospital', 'Police station'], a: 'Bakery', fb: 'Bakery significa panadería o pastelería.' },
+          { type: 'Listening', q: 'Listen / Escucha la dirección: "Turn right at the corner."', text: "Turn right at the corner", options: ['Gira a la derecha en la esquina', 'Gira a la izquierda', 'Sigue de frente'], a: 'Gira a la derecha en la esquina', fb: 'Turn right significa girar a la derecha.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "The supermarket is ___ to the bakery."', options: ['next', 'between', 'under'], a: 'next', fb: 'Usamos la expresión compuesta \'next to\' (al lado de).' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la indicación: "Turn right to find the park."', words: ['find', 'the', 'Turn', 'right', 'to', 'park'], a: 'Turn right to find the park', fb: 'Instrucción (Turn right) + Propósito (to find the park).' },
+          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la indicación de dirección:', options: ['Turn right', 'Turn left', 'Go straight', 'Eat lunch'], a: 'Eat lunch', fb: 'Eat lunch es una acción cotidiana, las demás son indicaciones de dirección.' }
+        ],
+        3: [
+          { type: 'Multiple Choice', q: 'Choose / ¿Qué edificio está al lado de la panadería según el texto?', options: ['The supermarket', 'The hospital', 'The museum'], a: 'The supermarket', fb: 'El texto señala que el supermercado está al lado de la panadería.' },
+          { type: 'Listening', q: 'Listen / Escucha: "The supermarket is next to the bakery."', text: "The supermarket is next to the bakery", options: ['El supermercado está al lado de la panadería', 'El supermercado está lejos', 'La panadería está cerrada'], a: 'El supermercado está al lado de la panadería', fb: 'Next to the bakery significa al lado de la panadería.' },
+          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Our town has a modern ___ (biblioteca)."', options: ['library', 'school', 'park'], a: 'library', fb: 'Library significa biblioteca.' },
+          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "Our town has a big park."', words: ['has', 'a', 'park', 'Our', 'town', 'big'], a: 'Our town has a big park', fb: 'Sujeto (Our town) + Verbo (has) + Complemento (a big park).' },
+          { type: 'Reading Comprehension', q: 'Reading Comprehension. What building is next to the supermarket?', passage: "Our town has a big green park and a modern library. The supermarket is next to the bakery. You can turn right to find the central park.", options: ['The bakery', 'The hospital', 'The cinema'], a: 'The bakery', fb: 'El texto detalla: \'The supermarket is next to the bakery\' (El supermercado está al lado de la panadería).' }
+        ]
+      }
+    };
 
     let currentModule = 1;
     let currentDay = 1;
@@ -310,7 +445,7 @@
 
       if (ex.type === 'Listening') {
         html += `<div class="mb-6 flex justify-center">
-                  <button onclick="playAudio('${ex.text}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 shadow-md transition-all transform active:scale-95">
+                  <button onclick="playAudio('${ex.text.replace(/'/g, "\\'")}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 shadow-md transition-all transform active:scale-95">
                     🔊 Escuchar Audio
                   </button>
                  </div>`;
@@ -326,7 +461,7 @@
         html += `<div id="scramble-box" class="min-h-[60px] p-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl mb-4 flex flex-wrap gap-2 items-center"></div>`;
         html += `<div class="flex flex-wrap gap-2 mb-6">`;
         ex.words.forEach(w => {
-          html += `<button onclick="addWord('${w}')" class="word-btn px-4 py-2 bg-indigo-100 text-indigo-800 font-bold rounded-lg hover:bg-indigo-200 transition-all">${w}</button>`;
+          html += `<button onclick="addWord('${w.replace(/'/g, "\\'")}')" class="word-btn px-4 py-2 bg-indigo-100 text-indigo-800 font-bold rounded-lg hover:bg-indigo-200 transition-all">${w}</button>`;
         });
         html += `</div>`;
         html += `<div class="flex gap-3">
