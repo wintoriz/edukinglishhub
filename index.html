@@ -3,541 +3,403 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edukinglish A1 - Plataforma Interactiva</title>
+  <title>Edukinglish - Ecosystem & Learning Game</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Nunito', sans-serif; }
     h1, h2, h3, .font-heading { font-family: 'Fredoka', cursive; }
+    .bounce-in { animation: bounceIn .5s ease; }
+    @keyframes bounceIn { 0%{transform:scale(.7);opacity:0} 60%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
+    .shake { animation: shake .4s ease; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    .float-slow { animation: floaty 3s ease-in-out infinite; }
+    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
   </style>
+  <base target="_blank">
 </head>
-<body class="bg-slate-100 min-h-screen text-slate-800 flex flex-col md:flex-row">
+<body class="bg-slate-100 min-h-screen text-slate-800">
 
-  <!-- Sidebar Nav -->
-  <aside class="w-full md:w-64 bg-indigo-900 text-white p-6 flex-shrink-0">
-    <div class="flex items-center gap-3 mb-8">
-      <div class="w-10 h-10 bg-amber-400 rounded-xl flex items-center justify-center text-indigo-900 font-bold text-2xl">E</div>
-      <span class="font-heading text-2xl tracking-wide text-amber-400">Edukinglish</span>
+<!-- ============ VISTA DE ACCESO ============ -->
+<div id="view-access" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-indigo-900 via-indigo-800 to-violet-900">
+  <div class="w-full max-w-md">
+    <div class="text-center mb-6 bounce-in">
+      <div class="text-7xl mb-2 float-slow">🦊</div>
+      <h1 class="text-4xl font-bold text-amber-400">Edukinglish</h1>
+      <p class="text-indigo-200 mt-1">Plataforma Interactiva Multinivel</p>
     </div>
-    
-    <p class="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-3">Módulos Nivel A1</p>
-    <nav class="space-y-1 overflow-y-auto max-h-[calc(100vh-160px)]" id="module-nav">
-      <!-- Generated via JS -->
-    </nav>
+
+    <div class="bg-white rounded-3xl shadow-2xl p-8">
+      <h2 class="text-xl font-bold text-slate-800 mb-4">Inicia tu aventura 🚀</h2>
+      
+      <label class="block text-sm font-bold text-slate-500 mb-1">Nombre del Alumno</label>
+      <input id="inp-name" type="text" maxlength="25" placeholder="¿Cómo te llamas?"
+        class="w-full p-3 rounded-xl border-2 border-slate-200 mb-4 font-bold focus:border-indigo-500 focus:outline-none">
+      
+      <label class="block text-sm font-bold text-slate-500 mb-1">Código de Alumno</label>
+      <input id="inp-code" type="text" maxlength="25" placeholder="Ej: EDU-001"
+        class="w-full p-3 rounded-xl border-2 border-slate-200 mb-4 font-bold focus:border-indigo-500 focus:outline-none uppercase">
+
+      <label class="block text-sm font-bold text-slate-500 mb-1">Selecciona tu Nivel</label>
+      <select id="inp-level" class="w-full p-3 rounded-xl border-2 border-slate-200 mb-4 font-bold focus:border-indigo-500 focus:outline-none bg-white text-slate-700">
+        <option value="A1">🦊 Explorers (Nivel A1)</option>
+        <option value="A2">🔍 Detectives (Nivel A2)</option>
+        <option value="B1">🌟 Leaders & Pathfinders (Nivel B1)</option>
+      </select>
+
+      <p id="access-error" class="hidden text-sm font-bold text-rose-600 mb-4 p-3 bg-rose-50 rounded-xl border border-rose-200"></p>
+
+      <button id="btn-login" onclick="login()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-lg py-4 rounded-2xl shadow-lg transition-all transform hover:scale-105 active:scale-95">
+        ¡Empezar Misiones! ✨
+      </button>
+    </div>
+    <p class="text-center text-indigo-300 text-xs mt-4">Edukinglish Learning Ecosystem · 2026</p>
+  </div>
+</div>
+
+<!-- ============ VISTA PRINCIPAL ============ -->
+<div id="view-app" class="hidden min-h-screen flex flex-col md:flex-row">
+
+  <!-- Sidebar -->
+  <aside class="w-full md:w-64 bg-indigo-900 text-white p-5 flex-shrink-0">
+    <div class="flex items-center gap-3 mb-5">
+      <div class="w-10 h-10 bg-amber-400 rounded-xl flex items-center justify-center text-2xl">🦊</div>
+      <div>
+        <span class="font-heading text-xl tracking-wide text-amber-400 block leading-none">Edukinglish</span>
+        <span id="sb-level-badge" class="text-[11px] text-indigo-300 font-bold">Nivel A1</span>
+      </div>
+    </div>
+
+    <div class="bg-indigo-800/60 rounded-xl p-3 mb-4 text-sm">
+      <div class="flex items-center gap-2 font-bold"><span class="text-lg">👋</span><span id="sb-name">...</span></div>
+      <div class="flex justify-between mt-2 text-indigo-200 text-xs font-bold">
+        <span>🔥 Racha: <span id="sb-streak" class="text-amber-400">1</span> día</span>
+        <span>⭐ <span id="sb-pts" class="text-amber-400">0</span> pts</span>
+      </div>
+    </div>
+
+    <p class="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-2">Módulos de la Misión</p>
+    <nav class="space-y-1 overflow-y-auto max-h-[45vh] md:max-h-[calc(100vh-290px)] pr-1" id="module-nav"></nav>
+    <button onclick="logout()" class="mt-4 w-full text-left px-3 py-2 text-xs font-bold text-indigo-400 hover:text-white transition-colors">↩ Salir / Cambiar datos</button>
   </aside>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main class="flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full">
-    
-    <!-- Top Header / Stats -->
-    <header class="flex flex-wrap items-center justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-6">
-      <div>
-        <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Nivel A1 • Principiante</span>
-        <h1 id="module-title" class="text-2xl md:text-3xl font-bold text-slate-800 mt-2">Módulo 1: Greetings & Introductions</h1>
+
+    <header class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-6">
+      <div class="flex items-center justify-between">
+        <span id="hdr-level-tag" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Nivel A1</span>
+        <span id="hdr-code-tag" class="text-xs font-bold text-slate-400">ID: ---</span>
       </div>
-      <div class="flex items-center gap-4">
-        <div class="bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-center">
-          <span class="block text-xs font-bold text-amber-700 uppercase">Puntos</span>
-          <span id="pts-counter" class="text-xl font-extrabold text-amber-600">0 PTS</span>
+      
+      <div class="flex flex-wrap items-end justify-between gap-3 mt-2">
+        <div>
+          <h1 id="module-title" class="text-2xl md:text-3xl font-bold text-slate-800">Módulo 1</h1>
+          <p id="module-subtitle" class="text-slate-500 font-semibold text-sm mt-1"></p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="bg-orange-50 border border-orange-200 px-4 py-2 rounded-xl text-center">
+            <span class="block text-[10px] font-bold text-orange-600 uppercase">🔥 Racha</span>
+            <span id="hdr-streak" class="text-xl font-extrabold text-orange-500">1 día</span>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-center">
+            <span class="block text-[10px] font-bold text-amber-700 uppercase">⭐ Puntos</span>
+            <span id="pts-counter" class="text-xl font-extrabold text-amber-600">0</span>
+          </div>
         </div>
       </div>
     </header>
 
-    <!-- Days Selector -->
-    <div class="grid grid-cols-3 gap-3 mb-6" id="days-selector">
-      <button onclick="selectDay(1)" id="btn-day-1" class="p-4 rounded-xl border-2 font-bold text-center transition-all bg-indigo-600 border-indigo-600 text-white shadow-md">
-        <span class="block text-xs uppercase opacity-80">Fase 1</span>
-        Día 1: Descubrimiento
-      </button>
-      <button onclick="selectDay(2)" id="btn-day-2" class="p-4 rounded-xl border-2 font-bold text-center transition-all bg-white border-slate-200 text-slate-600 hover:border-indigo-300">
-        <span class="block text-xs uppercase opacity-80">Fase 2</span>
-        Día 2: Práctica Guiada
-      </button>
-      <button onclick="selectDay(3)" id="btn-day-3" class="p-4 rounded-xl border-2 font-bold text-center transition-all bg-white border-slate-200 text-slate-600 hover:border-indigo-300">
-        <span class="block text-xs uppercase opacity-80">Fase 3</span>
-        Día 3: Reto y Maestría
-      </button>
-    </div>
+    <!-- Selector de Día/Fase -->
+    <div class="grid grid-cols-3 gap-3 mb-6" id="days-selector"></div>
 
-    <!-- Exercise Navigator -->
+    <!-- Indicador de ejercicios -->
     <div class="flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 mb-6">
-      <span class="text-sm font-bold text-slate-500">Ejercicios del día:</span>
-      <div class="flex gap-2" id="exercise-dots">
-        <!-- Dots JS -->
-      </div>
+      <span class="text-sm font-bold text-slate-500">Progreso de Ejercicios</span>
+      <div class="flex gap-2" id="exercise-dots"></div>
     </div>
 
-    <!-- Exercise Card -->
-    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8" id="exercise-container">
-      <!-- Exercise Content JS -->
-    </section>
-
+    <!-- Tarjeta del Ejercicio -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8" id="exercise-container"></section>
   </main>
+</div>
 
-  <script>
-    const moduleTitles = {
-      1: "Módulo 1: Greetings & Introductions",
-      2: "Módulo 2: Numbers, Age & Colors",
-      3: "Módulo 3: Family & Pets",
-      4: "Módulo 4: School Supplies & Classroom Objects",
-      5: "Módulo 5: Daily Routines & Actions",
-      6: "Módulo 6: Likes, Dislikes & Food",
-      7: "Módulo 7: Animals & Abilities",
-      8: "Módulo 8: House & Rooms",
-      9: "Módulo 9: Clothes & Weather",
-      10: "Módulo 10: Town & Places"
-    };
+<!-- ============ MODAL CELEBRACIÓN ============ -->
+<div id="modal" class="hidden fixed inset-0 bg-slate-900/70 flex items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center bounce-in">
+    <div class="text-6xl mb-3" id="modal-emoji">🎉</div>
+    <h2 class="text-2xl font-bold text-slate-800 mb-1" id="modal-title">¡Fase Completada!</h2>
+    <div class="text-4xl my-3 tracking-widest">⭐⭐⭐</div>
+    <p class="text-slate-500 font-semibold mb-6" id="modal-msg"></p>
+    <button id="modal-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-lg py-4 rounded-2xl shadow-lg transition-all transform hover:scale-105">
+      Continuar ➔
+    </button>
+  </div>
+</div>
 
-    const readingPassages = {
-      1: { title: "Lectura 1: Hello, Kingly!", text: "Hello! My name is Alex and I am a student. Kingly is my friendly teacher. We say good morning at school." },
-      2: { title: "Lectura 2: Leo's Birthday", text: "Today is Leo's birthday and he is ten years old. He has three blue balloons and seven red balloons. He is very happy." },
-      3: { title: "Lectura 3: Emma's Pet", text: "Emma lives with her mother and father. She has a small white cat named Snow. Her cat likes to play with a ball." },
-      4: { title: "Lectura 4: In the Classroom", text: "David opens his school bag on the desk. Inside the bag, there are four books and two yellow pencils. This is his favorite class." },
-      5: { title: "Lectura 5: Morning Routine", text: "Every day, Lucas wakes up at seven in the morning. He brushes his teeth and eats breakfast with his family. Then, he goes to school by bus." },
-      6: { title: "Lectura 6: Healthy Breakfast", text: "Sofia likes fresh fruit in the morning. She eats a red apple and drinks a glass of cold milk. She does not like soda." },
-      7: { title: "Lectura 7: Animals in the Wild", text: "Cheetahs and monkeys live in warm places. Cheetahs can run very fast on land. Monkeys can climb tall trees and jump between branches." },
-      8: { title: "Lectura 8: Where is Dogito?", text: "Dogito is not in the living room. Look, he is in the bedroom! He is sleeping under the bed next to his blue toy." },
-      9: { title: "Lectura 9: A Rainy Afternoon", text: "It is rainy and cold outside today. Carlos is wearing a warm coat and black boots. He holds a yellow umbrella." },
-      10: { title: "Lectura 10: Our Neighborhood", text: "Our town has a big green park and a modern library. The supermarket is next to the bakery. You can turn right to find the central park." }
-    };
+<script>
+/* ================= CONFIGURACIÓN GOOGLE SHEETS APPS SCRIPT ================= */
+// Coloca la URL de tu Web App desplegada en Google Apps Script
+const GOOGLE_SHEETS_WEBAPP_URL = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
 
-    const exercisesData = {
-      1: {
-        1: [
-          { type: 'Multiple Choice', q: 'Select the correct greeting for 8:00 AM', options: ['Good morning', 'Good night', 'Goodbye'], a: 'Good morning', fb: 'Good morning se usa desde temprano hasta el mediodía.' },
-          { type: 'Listening', q: 'Listen. Escucha el audio y selecciona la respuesta a: What\'s your name?', text: "What is your name?", options: ['My name is Alex', 'I am 10 years old', 'I\'m fine, thank you'], a: 'My name is Alex', fb: 'My name is... se usa para decir tu nombre.' },
-          { type: 'Fill in the Blanks', q: 'Complete. Hello, my name ___ Kingly.', options: ['is', 'am', 'are'], a: 'is', fb: 'Usamos \'is\' con nombres singulares o He/She/It.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble. Ordena las palabras para decir \'Gusto en conocerte\'', words: ['meet', 'Nice', 'to', 'you'], a: 'Nice to meet you', fb: 'La forma correcta es: Nice + to + meet + you.' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la palabra que no pertenece al grupo: Saludos matutinos y de bienvenida', options: ['Good morning', 'Hello', 'Hi', 'Good night'], a: 'Good night', fb: 'Good night se usa para despedirse antes de ir a dormir, mientras que las demás son saludos de bienvenida.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Select the correct greeting for 5:00 PM', options: ['Good afternoon', 'Good night', 'Goodbye'], a: 'Good afternoon', fb: 'Good afternoon se usa después de mediodía hasta antes que se ponga el sol.' },
-          { type: 'Listening', q: 'Listen. Escucha el audio y selecciona la respuesta a: How are you?', text: "How are you?", options: ['My name is Alex', 'I am 10 years old', 'I\'m fine, thank you'], a: 'I\'m fine, thank you', fb: 'I\'m fine, thank you... se usa para responder a un saludo.' },
-          { type: 'Fill in the Blanks', q: 'Complete. Hello, my name ___ Kingly.', options: ['is', 'am', 'are'], a: 'is', fb: 'Usamos \'is\' con nombres singulares o He/She/It.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble. Ordena las palabras para decir \'Él es Dogito\'', words: ['Dogito', 'He', 'is'], a: 'He is Dogito', fb: 'La forma correcta es: He + is + Dogito.' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la palabra que no pertenece al grupo: Expresiones de cortesía y saludos', options: ['Fine', 'Great', 'Good afternoon', 'Pencil'], a: 'Pencil', fb: 'Pencil (lápiz) es un útil escolar, mientras que las demás son saludos o estados de ánimo.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / Elige el pronombre correcto para una niña (She / Ella): "___ is a doctor."', options: ['She', 'He', 'It'], a: 'She', fb: 'Usamos \'She\' para referirnos a una mujer o niña en singular.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona la forma correcta del verbo To Be: "They ___ my best friends."', text: "They are my best friends", options: ['are', 'is', 'am'], a: 'are', fb: 'Usamos \'are\' con los pronombres plurales como \'They\' y \'We\'.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "I ___ a happy student."', options: ['am', 'is', 'are'], a: 'am', fb: 'El pronombre \'I\' (yo) siempre se conjuga con \'am\'.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras para formar la oración: "He is my teacher."', words: ['teacher', 'He', 'my', 'is'], a: 'He is my teacher', fb: 'La estructura básica en afirmativo es Sujeto (He) + Verbo (is) + Complemento (my teacher).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. Who is Kingly according to the text?', passage: "Hello! My name is Alex and I am a student. Kingly is my friendly teacher. We say good morning at school.", options: ['Alex\'s teacher', 'Alex\'s brother', 'A doctor'], a: 'Alex\'s teacher', fb: 'El texto indica claramente: \'Kingly is my friendly teacher\' (Kingly es mi amable profesor).' }
-        ]
-      },
-      2: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / Selecciona la escritura correcta del número 12 en inglés:', options: ['Twelve', 'Twenty', 'Two'], a: 'Twelve', fb: 'La palabra \'Twelve\' corresponde al número 12, mientras que \'Twenty\' es 20.' },
-          { type: 'Listening', q: 'Listen / Escucha el número y selecciona la cifra correspondiente: "Fifteen"', text: "Fifteen", options: ['15', '50', '5'], a: '15', fb: 'La palabra \'Fifteen\' representa al número 15 (la terminación -teen indica números del 13 al 19).' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa la serie numérica: "Eight, nine, ten, ___ (11)."', options: ['eleven', 'seven', 'twelve'], a: 'eleven', fb: 'El número que sigue después del diez (ten) es once (eleven).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "I have three red apples."', words: ['three', 'apples', 'I', 'red', 'have'], a: 'I have three red apples', fb: 'Orden: Sujeto (I) + Verbo (have) + Cantidad (three) + Color (red) + Sustantivo (apples).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la palabra que no pertenece al grupo: Números en inglés', options: ['Seven', 'Twelve', 'Fifteen', 'Apple'], a: 'Apple', fb: 'La palabra \'Apple\' (manzana) es una fruta comestible, mientras que Seven, Twelve y Fifteen son números.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / Elige la pregunta correcta para saber la edad de alguien:', options: ['How old are you?', 'How are you?', 'What is your name?'], a: 'How old are you?', fb: 'La pregunta \'How old are you?\' se usa para preguntar la edad a la persona con quien estás conversando.' },
-          { type: 'Listening', q: 'Listen / Escucha la respuesta y elige la opción que dice: "I am ten years old."', text: "I am ten years old", options: ['I am ten years old', 'I have ten years', 'I am two years old'], a: 'I am ten years old', fb: 'En inglés se usa el verbo To Be (\'I am...\') para expresar la edad, no \'have\'.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa la respuesta: "How old is Leo? - He ___ seven years old."', options: ['is', 'am', 'are'], a: 'is', fb: 'Usamos \'is\' porque el sujeto es \'He\' (Leo, tercera persona singular).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "I am nine years old."', words: ['old', 'years', 'am', 'nine', 'I'], a: 'I am nine years old', fb: 'El orden correcto para decir la edad es: Pronombre (I) + am + Número (nine) + years old.' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la opción incorrecta para responder a la edad:', options: ['I am eight years old', 'He is seven', 'I have nine years old', 'She is ten'], a: 'I have nine years old', fb: 'En inglés no se utiliza el verbo tener (have) para decir la edad.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué color resulta al mezclar azul y amarillo? "Blue + Yellow = ___"', options: ['Green', 'Purple', 'Orange'], a: 'Green', fb: 'Blue (azul) + Yellow (amarillo) forman Green (verde).' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona el color del sol: "The sun is yellow."', text: "The sun is yellow", options: ['Yellow', 'Blue', 'Black'], a: 'Yellow', fb: 'Yellow significa amarillo.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa con el color de las frutillas: "Strawberries are ___."', options: ['red', 'green', 'white'], a: 'red', fb: 'Las frutillas maduras son rojas (red).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "My favorite color is blue."', words: ['blue', 'favorite', 'My', 'is', 'color'], a: 'My favorite color is blue', fb: 'Orden: Posesivo y sujeto (My favorite color) + verbo (is) + color (blue).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. How old is Leo today?', passage: "Today is Leo's birthday and he is ten years old. He has three blue balloons and seven red balloons. He is very happy.", options: ['Ten years old', 'Seven years old', 'Three years old'], a: 'Ten years old', fb: 'El texto dice: \'he is ten years old\' (él tiene diez años).' }
-        ]
-      },
-      3: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Cómo se dice \'madre\' en inglés?', options: ['Mother', 'Father', 'Brother'], a: 'Mother', fb: 'Mother o Mom significa madre o mamá en inglés.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona a quién presenta la oración: "This is my brother."', text: "This is my brother", options: ['Mi hermano', 'Mi papá', 'Mi abuelo'], a: 'Mi hermano', fb: 'Brother significa hermano.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "My father\'s sister is my ___ (tía)."', options: ['aunt', 'sister', 'mother'], a: 'aunt', fb: 'La hermana de tu papá es tu tía (aunt).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "I love my family."', words: ['family', 'love', 'my', 'I'], a: 'I love my family', fb: 'Sujeto (I) + Verbo (love) + Complemento (my family).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el elemento que no pertenece al grupo de la familia:', options: ['Mother', 'Father', 'Sister', 'Teacher'], a: 'Teacher', fb: 'Teacher es una profesión, no un miembro de la familia.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué animal dice \'woof woof\'?', options: ['Dog', 'Cat', 'Fish'], a: 'Dog', fb: 'Dog es perro en inglés.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona la mascota mencionada: "I have a small cat."', text: "I have a small cat", options: ['Cat', 'Rabbit', 'Turtle'], a: 'Cat', fb: 'Cat significa gato.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "A gold___ swims in the bowl."', options: ['fish', 'bird', 'dog'], a: 'fish', fb: 'Fish significa pez o pescado (goldfish es pez dorado).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "My dog is very cute."', words: ['cute', 'very', 'My', 'is', 'dog'], a: 'My dog is very cute', fb: 'Sujeto (My dog) + Verbo (is) + Adverbio/Adjetivo (very cute).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la mascota que no puede volar:', options: ['Parrot', 'Canary', 'Dog', 'Bird'], a: 'Dog', fb: 'Dog (perro) no es un ave y no puede volar.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / Elige el adjetivo posesivo para él: "This is Lucas. That is ___ dog."', options: ['his', 'her', 'my'], a: 'his', fb: 'Usamos \'his\' para indicar pertenencia de un hombre o niño.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona el posesivo para ella: "Emma is playing with ___ cat."', text: "Emma is playing with her cat", options: ['her', 'his', 'your'], a: 'her', fb: 'Usamos \'her\' para la posesión femenina en tercera persona.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "What is ___ name? - My name is Carlos."', options: ['your', 'our', 'their'], a: 'your', fb: 'La pregunta directa a la segunda persona usa \'your\' (tu nombre).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "Her cat is white."', words: ['is', 'cat', 'Her', 'white'], a: 'Her cat is white', fb: 'Posesivo (Her) + Sustantivo (cat) + Verbo (is) + Adjetivo (white).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. What pet does Emma have?', passage: "Emma lives with her mother and father. She has a small white cat named Snow. Her cat likes to play with a ball.", options: ['A white cat', 'A big dog', 'A small goldfish'], a: 'A white cat', fb: 'El texto menciona: \'She has a small white cat named Snow\' (Ella tiene un pequeño gato blanco llamado Snow).' }
-        ]
-      },
-      4: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / Elige el nombre del objeto escolar usado para escribir: "I write with a ___."', options: ['Pencil', 'Chair', 'Table'], a: 'Pencil', fb: 'Pencil significa lápiz.' },
-          { type: 'Listening', q: 'Listen / Escucha y elige el objeto mencionado: "This is my book."', text: "This is my book", options: ['Book', 'Ruler', 'Eraser'], a: 'Book', fb: 'Book significa libro.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "There are two ___ on the desk."', options: ['books', 'book', 'a book'], a: 'books', fb: 'Usamos la forma plural \'books\' con la cantidad \'two\'.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "The ruler is yellow."', words: ['yellow', 'is', 'The', 'ruler'], a: 'The ruler is yellow', fb: 'Sujeto (The ruler) + Verbo (is) + Adjetivo (yellow).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la palabra que no es un útil escolar:', options: ['Pencil', 'Notebook', 'Eraser', 'Dog'], a: 'Dog', fb: 'Dog (perro) es un animal, no un útil escolar.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / Selecciona la palabra correcta para \'borrador\':', options: ['Eraser', 'Pen', 'Sharpener'], a: 'Eraser', fb: 'Eraser (o rubber) significa borrador o goma.' },
-          { type: 'Listening', q: 'Listen / Escucha: "Open your notebook."', text: "Open your notebook", options: ['Abre tu cuaderno', 'Abre la puerta', 'Cierra el libro'], a: 'Abre tu cuaderno', fb: 'Notebook significa cuaderno.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "I need a ___ to sharpen my pencil."', options: ['sharpener', 'chair', 'bag'], a: 'sharpener', fb: 'Sharpener significa tajador o sacapuntas.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "I have a blue backpack."', words: ['backpack', 'blue', 'a', 'have', 'I'], a: 'I have a blue backpack', fb: 'Sujeto (I) + Verbo (have) + Artículo/Adjetivo/Sustantivo (a blue backpack).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el mueble del salón de clases:', options: ['Desk', 'Pencil', 'Crayon', 'Marker'], a: 'Desk', fb: 'Desk (escritorio) es mobiliario, los demás son artículos de escribir.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / Selecciona el demostrativo singular para objetos cercanos: "___ is a pen."', options: ['This', 'These', 'Those'], a: 'This', fb: 'Usamos \'This\' para un objeto singular cercano.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona la traducción: "These are yellow pencils."', text: "These are yellow pencils", options: ['Estos son lápices amarillos', 'Este es un lápiz amarillo', 'Aquellos son lápices'], a: 'Estos son lápices amarillos', fb: 'These are se utiliza para plurales cercanos.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "___ is my teacher\'s desk."', options: ['That', 'Those', 'These'], a: 'That', fb: 'That se usa para señalar un objeto distante en singular.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "Those are my books."', words: ['my', 'are', 'books', 'Those'], a: 'Those are my books', fb: 'Demostrativo plural distante (Those) + verbo (are) + complemento (my books).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. How many books are inside David\'s bag?', passage: "David opens his school bag on the desk. Inside the bag, there are four books and two yellow pencils. This is his favorite class.", options: ['Four books', 'Two books', 'Six books'], a: 'Four books', fb: 'La lectura dice: \'there are four books and two yellow pencils\' (hay cuatro libros y dos lápices amarillos).' }
-        ]
-      },
-      5: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Cómo se dice \'despertarse\' en inglés?', options: ['Wake up', 'Go to sleep', 'Eat lunch'], a: 'Wake up', fb: 'Wake up significa despertarse.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona la acción: "I brush my teeth."', text: "I brush my teeth", options: ['Me lavo los dientes', 'Me lavo la cara', 'Desayuno'], a: 'Me lavo los dientes', fb: 'Brush my teeth significa lavarse o cepillarse los dientes.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Lucas ___ breakfast at 8:00 AM."', options: ['eats', 'eat', 'drinking'], a: 'eats', fb: 'Con He/She/It en presente simple agregamos -s al verbo (eats).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la rutina: "I wake up at seven."', words: ['at', 'seven', 'up', 'wake', 'I'], a: 'I wake up at seven', fb: 'Sujeto (I) + Verbo (wake up) + Hora (at seven).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la acción que NO es de la mañana:', options: ['Brush teeth', 'Wake up', 'Eat breakfast', 'Sleep at night'], a: 'Sleep at night', fb: 'Dormir por la noche (Sleep at night) no forma parte de la rutina matutina.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / Selecciona la forma correcta para He/She en presente simple: "She ___ to school by bus."', options: ['goes', 'go', 'going'], a: 'goes', fb: 'En tercera persona del singular (She), \'go\' cambia a \'goes\'.' },
-          { type: 'Listening', q: 'Listen / Escucha la frase: "He watches TV in the afternoon."', text: "He watches TV in the afternoon", options: ['Él ve televisión por la tarde', 'Él lee un libro', 'Él duerme por la tarde'], a: 'Él ve televisión por la tarde', fb: 'Watches TV significa ver televisión.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa la oración: "They ___ English every day."', options: ['study', 'studies', 'studying'], a: 'study', fb: 'Con \'They\' el verbo se mantiene en su forma base (study).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena las palabras: "She plays in the park."', words: ['in', 'plays', 'She', 'park', 'the'], a: 'She plays in the park', fb: 'Sujeto (She) + Verbo (plays) + Lugar (in the park).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la expresión de tiempo que no corresponde:', options: ['In the morning', 'In the afternoon', 'In the night', 'At night'], a: 'In the night', fb: 'La forma correcta en inglés es \'At night\', no \'In the night\'.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / ¿A qué hora almuerzas generalmente? "I eat lunch at ___."', options: ['12:00 PM', '7:00 AM', '10:00 PM'], a: '12:00 PM', fb: 'Lunch es el almuerzo que ocurre al mediodía.' },
-          { type: 'Listening', q: 'Listen / Escucha la pregunta: "What time do you go to bed?"', text: "What time do you go to bed?", options: ['¿A qué hora te vas a la cama?', '¿A qué hora desayunas?', '¿A qué hora estudias?'], a: '¿A qué hora te vas a la cama?', fb: 'Go to bed significa irse a dormir o a la cama.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa la hora: "I take a shower ___ 7:30 AM."', options: ['at', 'on', 'in'], a: 'at', fb: 'Usamos la preposición \'at\' para horas específicas.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "I go to sleep at night."', words: ['at', 'night', 'go', 'I', 'to', 'sleep'], a: 'I go to sleep at night', fb: 'Sujeto (I) + Verbo (go to sleep) + Expresión de tiempo (at night).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. How does Lucas go to school?', passage: "Every day, Lucas wakes up at seven in the morning. He brushes his teeth and eats breakfast with his family. Then, he goes to school by bus.", options: ['By bus', 'On foot', 'By car'], a: 'By bus', fb: 'El pasaje indica al final: \'Then, he goes to school by bus\' (Luego va a la escuela en autobús).' }
-        ]
-      },
-      6: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Cómo se dice \'manzana\' en inglés?', options: ['Apple', 'Banana', 'Orange'], a: 'Apple', fb: 'Apple significa manzana.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona la fruta: "I like bananas."', text: "I like bananas", options: ['Bananas', 'Apples', 'Grapes'], a: 'Bananas', fb: 'Bananas significa plátanos o bananas.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "I ___ fresh fruit for breakfast."', options: ['like', 'likes', 'liking'], a: 'like', fb: 'Con \'I\' usamos la forma base del verbo \'like\'.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la preferencia: "I like red apples."', words: ['like', 'apples', 'red', 'I'], a: 'I like red apples', fb: 'Sujeto (I) + Verbo (like) + Objeto (red apples).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el alimento que NO es una fruta:', options: ['Apple', 'Banana', 'Pizza', 'Orange'], a: 'Pizza', fb: 'Pizza es un plato preparado, no una fruta.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / Selecciona la respuesta negativa correcta: "Do you like soda? - No, I ___."', options: ['don\'t', 'doesn\'t', 'not'], a: 'don\'t', fb: 'Con \'I\' en respuestas cortas negativas usamos \'don\'t\'.' },
-          { type: 'Listening', q: 'Listen / Escucha la preferencia: "She doesn\'t like coffee."', text: "She doesn't like coffee", options: ['A ella no le gusta el café', 'A ella le gusta el café', 'Ella toma té'], a: 'A ella no le gusta el café', fb: 'Doesn\'t like expresa un disgusto en tercera persona.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "He ___ milk in the morning."', options: ['drinks', 'drink', 'drinking'], a: 'drinks', fb: 'Con \'He\' agregamos -s al verbo (drinks).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "We do not like soda."', words: ['like', 'not', 'do', 'soda', 'We'], a: 'We do not like soda', fb: 'Sujeto (We) + Auxiliar negativo (do not) + Verbo (like) + Objeto (soda).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la bebida saludable:', options: ['Milk', 'Water', 'Fruit juice', 'Soda'], a: 'Soda', fb: 'Soda (gaseosa) no se considera una bebida saludable frente al agua o leche.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Cuál es una opción saludable para el desayuno?', options: ['Eggs and fruit', 'French fries', 'Candy'], a: 'Eggs and fruit', fb: 'Huevos y fruta es un desayuno nutritivo.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona: "Sofia drinks a glass of cold milk."', text: "Sofia drinks a glass of cold milk", options: ['Un vaso de leche fría', 'Un vaso de agua', 'Una taza de café caliente'], a: 'Un vaso de leche fría', fb: 'Glass of cold milk es un vaso de leche fría.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Do you ___ cheese? - Yes, I do."', options: ['eat', 'eats', 'eating'], a: 'eat', fb: 'Después del auxiliar \'do\', el verbo principal va en su forma base (eat).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "Fruit is good for health."', words: ['good', 'for', 'Fruit', 'is', 'health'], a: 'Fruit is good for health', fb: 'Sujeto (Fruit) + Verbo (is) + Adjetivo/Complemento (good for health).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. What does Sofia drink for breakfast?', passage: "Sofia likes fresh fruit in the morning. She eats a red apple and drinks a glass of cold milk. She does not like soda.", options: ['Cold milk', 'Orange juice', 'Hot coffee'], a: 'Cold milk', fb: 'El texto afirma: \'drinks a glass of cold milk\' (bebe un vaso de leche fría).' }
-        ]
-      },
-      7: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué animal puede volar en el aire?', options: ['Bird', 'Fish', 'Dog'], a: 'Bird', fb: 'Bird significa ave o pájaro y puede volar.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona el animal salvaje: "The lion is strong."', text: "The lion is strong", options: ['Lion', 'Cat', 'Mouse'], a: 'Lion', fb: 'Lion significa león.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Monkeys can ___ tall trees."', options: ['climb', 'climbs', 'climbing'], a: 'climb', fb: 'Después del verbo modal \'can\', el verbo principal permanece sin cambios (climb).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la capacidad: "Birds can fly high."', words: ['fly', 'Birds', 'high', 'can'], a: 'Birds can fly high', fb: 'Sujeto (Birds) + Modal (can) + Verbo principal (fly) + Adverbio (high).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el animal acuático:', options: ['Fish', 'Dolphin', 'Whale', 'Monkey'], a: 'Monkey', fb: 'Monkey (mono) es un mamífero terrestre.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué verbo modal se usa para habilidades? "I ___ swim very well."', options: ['can', 'must', 'should'], a: 'can', fb: 'Can expresa habilidad o capacidad en presente.' },
-          { type: 'Listening', q: 'Listen / Escucha la oración negativa: "Penguins cannot fly."', text: "Penguins cannot fly", options: ['Los pingüinos no pueden volar', 'Los pingüinos vuelan alto', 'Los pingüinos nadan despacio'], a: 'Los pingüinos no pueden volar', fb: 'Cannot / Can\'t expresa imposibilidad o falta de habilidad.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Cheetahs ___ run very fast."', options: ['can', 'is', 'are'], a: 'can', fb: 'Can indica la habilidad del guepardo de correr rápido.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "Dolphins can swim fast."', words: ['swim', 'can', 'Dolphins', 'fast'], a: 'Dolphins can swim fast', fb: 'Sujeto (Dolphins) + Modal (can) + Verbo (swim) + Adverbio (fast).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la habilidad física:', options: ['Run', 'Jump', 'Swim', 'Pencil'], a: 'Pencil', fb: 'Pencil es un objeto, mientras que Run, Jump y Swim son acciones/habilidades.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué animal corre más rápido en tierra?', options: ['Cheetah', 'Elephant', 'Turtle'], a: 'Cheetah', fb: 'Cheetah (guepardo) es el animal terrestre más veloz.' },
-          { type: 'Listening', q: 'Listen / Escucha: "Monkeys jump between branches."', text: "Monkeys jump between branches", options: ['Los monos saltan entre ramas', 'Los monos comen plátanos', 'Los monos duermen'], a: 'Los monos saltan entre ramas', fb: 'Jump between branches significa saltar entre ramas.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Eagles can ___ high in the sky."', options: ['fly', 'run', 'swim'], a: 'fly', fb: 'Fly es el verbo correcto para el vuelo de las águilas.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "Cheetahs can run fast."', words: ['fast', 'can', 'run', 'Cheetahs'], a: 'Cheetahs can run fast', fb: 'Sujeto (Cheetahs) + can + run + fast.' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. What can cheetahs do according to the text?', passage: "Cheetahs and monkeys live in warm places. Cheetahs can run very fast on land. Monkeys can climb tall trees and jump between branches.", options: ['Run very fast', 'Fly high in the sky', 'Swim in deep water'], a: 'Run very fast', fb: 'El texto especifica: \'Cheetahs can run very fast on land\' (Los guepardos pueden correr muy rápido en tierra).' }
-        ]
-      },
-      8: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / ¿En qué habitación de la casa duermes?', options: ['Bedroom', 'Kitchen', 'Bathroom'], a: 'Bedroom', fb: 'Bedroom significa dormitorio o habitación.' },
-          { type: 'Listening', q: 'Listen / Escucha y selecciona el lugar: "Mom is in the kitchen."', text: "Mom is in the kitchen", options: ['Cocina', 'Jardín', 'Garaje'], a: 'Cocina', fb: 'Kitchen significa cocina.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "We watch TV in the living ___."', options: ['room', 'house', 'table'], a: 'room', fb: 'Living room significa sala de estar.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la ubicación: "Dogito is in the bedroom."', words: ['bedroom', 'is', 'in', 'Dogito', 'the'], a: 'Dogito is in the bedroom', fb: 'Sujeto (Dogito) + Verbo (is) + Preposición/Lugar (in the bedroom).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la habitación de la casa:', options: ['Kitchen', 'Bathroom', 'Bedroom', 'Supermarket'], a: 'Supermarket', fb: 'Supermarket es un comercio de la ciudad, no una parte de la casa.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / Selecciona la preposición para \'debajo de\':', options: ['Under', 'On', 'In'], a: 'Under', fb: 'Under significa debajo o debajo de.' },
-          { type: 'Listening', q: 'Listen / Escucha la posición: "The cat is on the sofa."', text: "The cat is on the sofa", options: ['El gato está sobre el sofá', 'El gato está debajo del sofá', 'El gato está en la cocina'], a: 'El gato está sobre el sofá', fb: 'On indica que el objeto o animal está sobre la superficie.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "The books are ___ the desk."', options: ['on', 'under', 'next'], a: 'on', fb: 'On se utiliza para objetos colocados sobre una mesa o escritorio.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "He is sleeping under the bed."', words: ['bed', 'under', 'is', 'sleeping', 'He', 'the'], a: 'He is sleeping under the bed', fb: 'Sujeto (He) + Verbo (is sleeping) + Preposición y lugar (under the bed).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la preposición de lugar:', options: ['Under', 'Next to', 'On', 'Jump'], a: 'Jump', fb: 'Jump es un verbo (saltar), mientras que las demás son preposiciones.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué mueble se encuentra habitualmente en el dormitorio?', options: ['Bed', 'Stove', 'Shower'], a: 'Bed', fb: 'Bed (cama) es el mueble principal del dormitorio.' },
-          { type: 'Listening', q: 'Listen / Escucha: "Dogito is next to his blue toy."', text: "Dogito is next to his blue toy", options: ['Dogito está al lado de su juguete azul', 'Dogito está lejos de su juguete', 'Dogito no tiene juguetes'], a: 'Dogito está al lado de su juguete azul', fb: 'Next to significa al lado de.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Where ___ Dogito? - He is in the bedroom."', options: ['is', 'are', 'am'], a: 'is', fb: 'Usamos \'is\' para preguntar la ubicación de un sujeto singular (Dogito).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la respuesta: "He is next to the toy."', words: ['the', 'next', 'is', 'He', 'to', 'toy'], a: 'He is next to the toy', fb: 'Sujeto (He) + Verbo (is) + Preposición compuesta (next to) + Objeto (the toy).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. Where is Dogito sleeping?', passage: "Dogito is not in the living room. Look, he is in the bedroom! He is sleeping under the bed next to his blue toy.", options: ['Under the bed', 'On the sofa', 'In the kitchen'], a: 'Under the bed', fb: 'El texto señala: \'He is sleeping under the bed next to his blue toy\' (Está durmiendo debajo de la cama).' }
-        ]
-      },
-      9: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué prenda de vestir usas en los pies?', options: ['Boots', 'Hat', 'Shirt'], a: 'Boots', fb: 'Boots (botas) o shoes (zapatos) se usan en los pies.' },
-          { type: 'Listening', q: 'Listen / Escucha la prenda de vestir: "He is wearing a coat."', text: "He is wearing a coat", options: ['Un abrigo', 'Un sombrero', 'Pantalones cortos'], a: 'Un abrigo', fb: 'Coat significa abrigo o casaca.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Carlos is wearing black ___ on his feet."', options: ['boots', 'coat', 'umbrella'], a: 'boots', fb: 'Boots (botas) se llevan en los pies.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la oración: "I wear a warm coat."', words: ['coat', 'wear', 'warm', 'I', 'a'], a: 'I wear a warm coat', fb: 'Sujeto (I) + Verbo (wear) + Complemento (a warm coat).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el objeto de vestir para días fríos:', options: ['Warm coat', 'Boots', 'Gloves', 'Shorts'], a: 'Shorts', fb: 'Shorts (pantalones cortos) se usan en clima cálido o de verano.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué tiempo atmosférico requiere usar paraguas?', options: ['Rainy', 'Sunny', 'Hot'], a: 'Rainy', fb: 'Rainy significa lluvioso.' },
-          { type: 'Listening', q: 'Listen / Escucha el clima: "It is rainy and cold today."', text: "It is rainy and cold today", options: ['Está lluvioso y frío hoy', 'Hace mucho calor y sol', 'Está nublado y caluroso'], a: 'Está lluvioso y frío hoy', fb: 'Rainy and cold indica lluvia y bajas temperaturas.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "He holds a yellow ___ to protect from rain."', options: ['umbrella', 'hat', 'shirt'], a: 'umbrella', fb: 'Umbrella significa paraguas o sombrilla.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "It is cold outside today."', words: ['outside', 'cold', 'is', 'It', 'today'], a: 'It is cold outside today', fb: 'Clima impersonal (It is) + Adjetivo (cold) + Lugar/Tiempo (outside today).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el adjetivo que describe clima:', options: ['Rainy', 'Cold', 'Sunny', 'Pencil'], a: 'Pencil', fb: 'Pencil es un útil escolar, los demás son adjetivos de clima.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué ropa te pones cuando hace mucho calor en verano?', options: ['T-shirt and shorts', 'Coat and boots', 'Sweater and scarf'], a: 'T-shirt and shorts', fb: 'Camiseta (T-shirt) y pantalones cortos (shorts) son ideales para clima cálido.' },
-          { type: 'Listening', q: 'Listen / Escucha: "Carlos holds a yellow umbrella."', text: "Carlos holds a yellow umbrella", options: ['Carlos sostiene un paraguas amarillo', 'Carlos compra un paraguas azul', 'Carlos no tiene paraguas'], a: 'Carlos sostiene un paraguas amarillo', fb: 'Yellow umbrella significa paraguas amarillo.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "What is the weather like? - It is ___ (soleado)."', options: ['sunny', 'rainy', 'snowy'], a: 'sunny', fb: 'Sunny significa soleado.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la prenda: "She wears a yellow hat."', words: ['yellow', 'wears', 'She', 'hat', 'a'], a: 'She wears a yellow hat', fb: 'Sujeto (She) + Verbo (wears) + Objeto (a yellow hat).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. What is Carlos wearing for the cold weather?', passage: "It is rainy and cold outside today. Carlos is wearing a warm coat and black boots. He holds a yellow umbrella.", options: ['A warm coat and boots', 'A t-shirt and shorts', 'A summer hat'], a: 'A warm coat and boots', fb: 'El pasaje explica: \'Carlos is wearing a warm coat and black boots\' (Carlos lleva puesto un abrigo abrigador y botas negras).' }
-        ]
-      },
-      10: {
-        1: [
-          { type: 'Multiple Choice', q: 'Choose / ¿En qué lugar de la ciudad compras alimentos?', options: ['Supermarket', 'Library', 'Park'], a: 'Supermarket', fb: 'Supermarket significa supermercado.' },
-          { type: 'Listening', q: 'Listen / Escucha el lugar público: "Our town has a big green park."', text: "Our town has a big green park", options: ['Un parque verde grande', 'Una biblioteca moderna', 'Un cine nuevo'], a: 'Un parque verde grande', fb: 'Big green park significa un gran parque verde.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "You can read books in the ___."', options: ['library', 'bakery', 'bank'], a: 'library', fb: 'Library significa biblioteca (lugar para leer o prestar libros).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "The park is green."', words: ['green', 'is', 'The', 'park'], a: 'The park is green', fb: 'Sujeto (The park) + Verbo (is) + Adjetivo (green).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona el lugar de la ciudad:', options: ['Library', 'Supermarket', 'Bakery', 'Bedroom'], a: 'Bedroom', fb: 'Bedroom es una habitación de la casa, no un establecimiento urbano.' }
-        ],
-        2: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Dónde compras pan fresco y pasteles?', options: ['Bakery', 'Hospital', 'Police station'], a: 'Bakery', fb: 'Bakery significa panadería o pastelería.' },
-          { type: 'Listening', q: 'Listen / Escucha la dirección: "Turn right at the corner."', text: "Turn right at the corner", options: ['Gira a la derecha en la esquina', 'Gira a la izquierda', 'Sigue de frente'], a: 'Gira a la derecha en la esquina', fb: 'Turn right significa girar a la derecha.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "The supermarket is ___ to the bakery."', options: ['next', 'between', 'under'], a: 'next', fb: 'Usamos la expresión compuesta \'next to\' (al lado de).' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la indicación: "Turn right to find the park."', words: ['find', 'the', 'Turn', 'right', 'to', 'park'], a: 'Turn right to find the park', fb: 'Instrucción (Turn right) + Propósito (to find the park).' },
-          { type: 'Odd One Out', q: 'Odd One Out. Selecciona la indicación de dirección:', options: ['Turn right', 'Turn left', 'Go straight', 'Eat lunch'], a: 'Eat lunch', fb: 'Eat lunch es una acción cotidiana, las demás son indicaciones de dirección.' }
-        ],
-        3: [
-          { type: 'Multiple Choice', q: 'Choose / ¿Qué edificio está al lado de la panadería según el texto?', options: ['The supermarket', 'The hospital', 'The museum'], a: 'The supermarket', fb: 'El texto señala que el supermercado está al lado de la panadería.' },
-          { type: 'Listening', q: 'Listen / Escucha: "The supermarket is next to the bakery."', text: "The supermarket is next to the bakery", options: ['El supermercado está al lado de la panadería', 'El supermercado está lejos', 'La panadería está cerrada'], a: 'El supermercado está al lado de la panadería', fb: 'Next to the bakery significa al lado de la panadería.' },
-          { type: 'Fill in the Blanks', q: 'Complete / Completa: "Our town has a modern ___ (biblioteca)."', options: ['library', 'school', 'park'], a: 'library', fb: 'Library significa biblioteca.' },
-          { type: 'Sentence Unscramble', q: 'Unscramble / Ordena la frase: "Our town has a big park."', words: ['has', 'a', 'park', 'Our', 'town', 'big'], a: 'Our town has a big park', fb: 'Sujeto (Our town) + Verbo (has) + Complemento (a big park).' },
-          { type: 'Reading Comprehension', q: 'Reading Comprehension. What building is next to the supermarket?', passage: "Our town has a big green park and a modern library. The supermarket is next to the bakery. You can turn right to find the central park.", options: ['The bakery', 'The hospital', 'The cinema'], a: 'The bakery', fb: 'El texto detalla: \'The supermarket is next to the bakery\' (El supermercado está al lado de la panadería).' }
-        ]
-      }
-    };
+const levelTitles = {
+  "A1": "🦊 Explorers (Nivel A1)",
+  "A2": "🔍 Detectives (Nivel A2)",
+  "B1": "🌟 Leaders & Pathfinders (Nivel B1)"
+};
 
-    let currentModule = 1;
-    let currentDay = 1;
-    let currentExIndex = 0;
-    let pts = 0;
-    let isSolved = false;
+const moduleTitles = {
+  "A1": {"1": "Greetings & Introductions", "2": "Numbers, Age & Colors", "3": "Family & Pets", "4": "School & Objects", "5": "Daily Habits", "6": "Food & Drinks", "7": "Wild Animals & Abilities", "8": "House & Prepositions", "9": "Clothes & Weather", "10": "City & Places"},
+  "A2": {"1": "Logic & Mystery Escape", "2": "World Explorers & Countries", "3": "Science & Experiments", "4": "The Money Mission", "5": "Travel & Transportation", "6": "Health & Body", "7": "Jobs & Professions", "8": "Environment & Nature", "9": "Technology & Media", "10": "Culture & Festivals"},
+  "B1": {"1": "Storytelling & Pitching", "2": "Future Tech & AI", "3": "Real-World Business", "4": "Personal Finance & Strategy", "5": "Global Citizenship", "6": "Debates & Opinions", "7": "Leadership Skills", "8": "Media Literacy", "9": "Creative Writing", "10": "Career Exploration"}
+};
 
-    function renderNav() {
-      const nav = document.getElementById('module-nav');
-      nav.innerHTML = '';
-      for (let i = 1; i <= 10; i++) {
-        const btn = document.createElement('button');
-        btn.className = `w-full text-left px-4 py-3 rounded-xl font-bold transition-all flex items-center justify-between mb-1 ${i === currentModule ? 'bg-indigo-700 text-amber-400' : 'hover:bg-indigo-800 text-indigo-100'}`;
-        btn.innerHTML = `<span>Módulo ${i}</span> <span class="text-xs bg-indigo-950/50 px-2 py-1 rounded">15 Ej.</span>`;
-        btn.onclick = () => selectModule(i);
-        nav.appendChild(btn);
+/* ================= BANCO DE EJERCICIOS BASE ================= */
+const exercisesData = {
+  "A1": {
+    "1": {
+      "1": [
+        {"type": "Multiple Choice", "q": "Select the correct greeting for 8:00 AM", "a": "Good morning", "fb": "Good morning se usa desde temprano hasta el mediodía.", "options": ["Good morning", "Good night", "Goodbye"]},
+        {"type": "Listening", "q": "Listen. Escucha y selecciona la respuesta a: What's your name?", "a": "My name is Alex", "fb": "My name is... se usa para decir tu nombre.", "text": "What's your name?", "options": ["My name is Alex", "I am 10 years old", "I'm fine, thank you"]},
+        {"type": "Fill in the Blanks", "q": "Complete. Hello, my name ___ Kingly.", "a": "is", "fb": "Usamos 'is' con nombres singulares o He/She/It.", "options": ["is", "am", "are"]},
+        {"type": "Sentence Unscramble", "q": "Unscramble. Ordena para decir 'Él es Dogito':", "a": "He is Dogito", "fb": "La estructura es: Sujeto (He) + Verbo (is) + Nombre (Dogito).", "options": ["Dogito | He | is", "He is Dogito", "is He Dogito"]},
+        {"type": "Odd One Out", "q": "Odd One Out. Selecciona la palabra que no pertenece al grupo:", "a": "Good night", "fb": "Good night se usa para despedirse antes de dormir.", "options": ["Good morning", "Hello", "Hi", "Good night"]}
+      ]
+    }
+  }
+};
+
+const STORAGE_KEY = 'edukinglish_app_v3';
+let currentLevel = "A1", currentModule = 1, currentDay = 1, currentExIndex = 0;
+let isSolved = false;
+let profile = null;
+
+async function login() {
+  const name = document.getElementById('inp-name').value.trim();
+  const code = document.getElementById('inp-code').value.trim().toUpperCase();
+  const level = document.getElementById('inp-level').value;
+  const err = document.getElementById('access-error');
+  const btn = document.getElementById('btn-login');
+
+  err.classList.add('hidden');
+
+  if (!name || !code) {
+    err.textContent = '❌ Por favor ingresa tu nombre y código de alumno.';
+    err.classList.remove('hidden');
+    return;
+  }
+
+  btn.innerText = "Verificando en Google Sheets... ⏳";
+  btn.disabled = true;
+
+  try {
+    let isValid = true;
+    if (GOOGLE_SHEETS_WEBAPP_URL && !GOOGLE_SHEETS_WEBAPP_URL.includes("PEGA_AQUI")) {
+      const res = await fetch(`${GOOGLE_SHEETS_WEBAPP_URL}?code=${code}`);
+      const data = await res.json();
+      if (data.status === "INACTIVE" || data.status === "PENDING") {
+        isValid = false;
       }
     }
 
-    function selectModule(m) {
-      currentModule = m;
-      currentDay = 1;
-      currentExIndex = 0;
-      document.getElementById('module-title').innerText = moduleTitles[m] || `Módulo ${m}`;
-      renderNav();
-      updateUI();
+    btn.innerText = "¡Empezar Misiones! ✨";
+    btn.disabled = false;
+
+    if (isValid) {
+      currentLevel = level;
+      profile = { name, code, level, pts: 0, streak: 1 };
+      saveProfile();
+      enterApp();
+    } else {
+      err.innerHTML = `⚠️ Tu suscripción no está activa.<br><a href="https://wa.me/522220000000?text=Hola,%20quiero%20renovar%20mi%20suscripcion%20codigo%20${code}" target="_blank" class="underline font-bold text-indigo-700">Contactar Soporte por WhatsApp 📲</a>`;
+      err.classList.remove('hidden');
     }
+  } catch(e) {
+    btn.innerText = "¡Empezar Misiones! ✨";
+    btn.disabled = false;
+    currentLevel = level;
+    profile = { name, code, level, pts: 0, streak: 1 };
+    enterApp();
+  }
+}
 
-    function selectDay(d) {
-      currentDay = d;
-      currentExIndex = 0;
-      updateUI();
-    }
+function sendProgressToSheets() {
+  if (!GOOGLE_SHEETS_WEBAPP_URL || GOOGLE_SHEETS_WEBAPP_URL.includes("PEGA_AQUI")) return;
+  fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      code: profile.code,
+      name: profile.name,
+      level: currentLevel,
+      module: currentModule,
+      day: currentDay,
+      pts: profile.pts
+    })
+  }).catch(e => console.log(e));
+}
 
-    function updateUI() {
-      isSolved = false;
-      selectedWords = [];
-      
-      [1, 2, 3].forEach(d => {
-        const b = document.getElementById(`btn-day-${d}`);
-        if (d === currentDay) {
-          b.className = "p-4 rounded-xl border-2 font-bold text-center transition-all bg-indigo-600 border-indigo-600 text-white shadow-md";
-        } else {
-          b.className = "p-4 rounded-xl border-2 font-bold text-center transition-all bg-white border-slate-200 text-slate-600 hover:border-indigo-300";
-        }
-      });
+function saveProfile() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  sendProgressToSheets();
+}
 
-      const dots = document.getElementById('exercise-dots');
-      dots.innerHTML = '';
-      const dayExercises = (exercisesData[currentModule] && exercisesData[currentModule][currentDay]) || [];
-      
-      dayExercises.forEach((ex, idx) => {
-        const dot = document.createElement('button');
-        dot.className = `w-9 h-9 rounded-lg font-bold text-sm transition-all ${idx === currentExIndex ? 'bg-indigo-600 text-white scale-110 shadow-sm' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`;
-        dot.innerText = idx + 1;
-        dot.onclick = () => { currentExIndex = idx; updateUI(); };
-        dots.appendChild(dot);
-      });
+function enterApp() {
+  document.getElementById('view-access').classList.add('hidden');
+  document.getElementById('view-app').classList.remove('hidden');
+  document.getElementById('sb-name').textContent = profile.name;
+  document.getElementById('sb-level-badge').textContent = levelTitles[currentLevel] || currentLevel;
+  document.getElementById('hdr-level-tag').textContent = levelTitles[currentLevel] || currentLevel;
+  document.getElementById('hdr-code-tag').textContent = `ID: ${profile.code}`;
+  renderNav();
+  updateUI();
+}
 
-      renderExercise();
-    }
+function logout() {
+  document.getElementById('view-app').classList.add('hidden');
+  document.getElementById('view-access').classList.remove('hidden');
+}
 
-    function nextExercise() {
-      const dayExercises = (exercisesData[currentModule] && exercisesData[currentModule][currentDay]) || [];
-      if (currentExIndex < dayExercises.length - 1) {
-        currentExIndex++;
-        updateUI();
-      } else if (currentDay < 3) {
-        currentDay++;
-        currentExIndex = 0;
-        updateUI();
-      } else {
-        alert("¡Felicidades! Has completado los ejercicios de este módulo 🎉");
-      }
-    }
+function renderNav() {
+  const nav = document.getElementById('module-nav');
+  nav.innerHTML = '';
+  const titles = moduleTitles[currentLevel] || {};
 
-    function playAudio(text) {
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        window.speechSynthesis.speak(utterance);
-      }
-    }
+  for (let i = 1; i <= 10; i++) {
+    const btn = document.createElement('button');
+    btn.className = `w-full text-left px-3 py-2.5 rounded-xl font-bold transition-all flex items-center justify-between text-xs mb-1 ${
+      i === currentModule ? 'bg-indigo-700 text-amber-400' : 'hover:bg-indigo-800 text-indigo-100'
+    }`;
+    btn.innerHTML = `<span class="truncate">📘 M${i}: ${titles[i] || 'Módulo ' + i}</span>`;
+    btn.onclick = () => { currentModule = i; currentDay = 1; currentExIndex = 0; updateUI(); };
+    nav.appendChild(btn);
+  }
+}
 
-    function renderExercise() {
-      const container = document.getElementById('exercise-container');
-      const dayExercises = (exercisesData[currentModule] && exercisesData[currentModule][currentDay]) || [];
+function updateUI() {
+  document.getElementById('module-title').innerText = `Módulo ${currentModule}`;
+  document.getElementById('module-subtitle').innerText = (moduleTitles[currentLevel] || {})[currentModule] || '';
+  document.getElementById('pts-counter').textContent = profile.pts;
+  document.getElementById('sb-pts').textContent = profile.pts;
 
-      if (!dayExercises || dayExercises.length === 0) {
-        container.innerHTML = `<div class="text-center py-12"><p class="text-slate-400 font-bold">Contenido en preparación para este módulo...</p></div>`;
-        return;
-      }
+  const ds = document.getElementById('days-selector');
+  ds.innerHTML = '';
+  for (let d = 1; d <= 3; d++) {
+    const b = document.createElement('button');
+    b.className = `p-3 rounded-xl border-2 font-bold text-center transition-all ${
+      d === currentDay ? 'bg-indigo-600 border-indigo-600 text-white shadow-md' : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300'
+    }`;
+    b.innerHTML = `<span class="block text-[10px] uppercase opacity-80">Fase ${d}</span>Día ${d}`;
+    b.onclick = () => { currentDay = d; currentExIndex = 0; updateUI(); };
+    ds.appendChild(b);
+  }
 
-      const ex = dayExercises[currentExIndex];
+  const dots = document.getElementById('exercise-dots');
+  dots.innerHTML = '';
+  for (let idx = 0; idx < 5; idx++) {
+    const dot = document.createElement('button');
+    dot.className = `w-8 h-8 rounded-lg font-bold text-xs transition-all ${
+      idx === currentExIndex ? 'bg-indigo-600 text-white scale-110 shadow-sm' : 'bg-slate-100 text-slate-500'
+    }`;
+    dot.innerText = idx + 1;
+    dots.appendChild(dot);
+  }
 
-      let html = `<div class="mb-4 flex items-center justify-between">
-                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md">${ex.type}</span>
-                    <span class="text-xs font-bold text-slate-400">Ejercicio ${currentExIndex + 1} de 5</span>
-                  </div>`;
+  renderExercise();
+}
 
-      if (ex.type === 'Reading Comprehension' || ex.passage) {
-        const passageText = ex.passage || (readingPassages[currentModule] ? readingPassages[currentModule].text : "");
-        html += `<div class="mb-6 p-4 bg-amber-50/80 border border-amber-200 rounded-xl">
-                  <span class="block text-xs font-extrabold uppercase text-amber-800 mb-1">📖 Lectura de Comprensión:</span>
-                  <p class="text-slate-700 italic font-medium leading-relaxed">"${passageText}"</p>
-                 </div>`;
-      }
+function playAudio(text) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  }
+}
 
-      html += `<h3 class="text-xl font-bold text-slate-800 mb-6">${ex.q}</h3>`;
+function renderExercise() {
+  const container = document.getElementById('exercise-container');
+  const levelData = exercisesData[currentLevel] || exercisesData["A1"];
+  const moduleData = levelData[currentModule] || levelData["1"];
+  const dayData = moduleData[currentDay] || moduleData["1"];
+  const ex = dayData[currentExIndex] || dayData[0];
 
-      if (ex.type === 'Listening') {
-        html += `<div class="mb-6 flex justify-center">
-                  <button onclick="playAudio('${ex.text.replace(/'/g, "\\'")}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 shadow-md transition-all transform active:scale-95">
-                    🔊 Escuchar Audio
-                  </button>
-                 </div>`;
-      }
+  isSolved = false;
 
-      if (ex.type === 'Multiple Choice' || ex.type === 'Listening' || ex.type === 'Fill in the Blanks' || ex.type === 'Odd One Out' || ex.type === 'Reading Comprehension') {
-        html += `<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">`;
-        ex.options.forEach((opt, idx) => {
-          html += `<button id="btn-opt-${idx}" onclick="checkOption(this, '${opt.replace(/'/g, "\\'")}', '${ex.a.replace(/'/g, "\\'")}', '${ex.fb.replace(/'/g, "\\'")}')" class="opt-btn p-4 rounded-xl border-2 border-slate-200 font-bold text-slate-700 hover:border-indigo-400 hover:bg-indigo-50/50 transition-all text-left">${opt}</button>`;
-        });
-        html += `</div>`;
-      } else if (ex.type === 'Sentence Unscramble') {
-        html += `<div id="scramble-box" class="min-h-[60px] p-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl mb-4 flex flex-wrap gap-2 items-center"></div>`;
-        html += `<div class="flex flex-wrap gap-2 mb-6">`;
-        ex.words.forEach(w => {
-          html += `<button onclick="addWord('${w.replace(/'/g, "\\'")}')" class="word-btn px-4 py-2 bg-indigo-100 text-indigo-800 font-bold rounded-lg hover:bg-indigo-200 transition-all">${w}</button>`;
-        });
-        html += `</div>`;
-        html += `<div class="flex gap-3">
-                  <button onclick="checkUnscramble('${ex.a.replace(/'/g, "\\'")}', '${ex.fb.replace(/'/g, "\\'")}')" class="bg-indigo-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-indigo-700 shadow-md">Comprobar</button>
-                  <button onclick="clearWords()" class="bg-slate-200 text-slate-600 font-bold px-4 py-3 rounded-xl hover:bg-slate-300">Limpiar</button>
-                 </div>`;
-      }
+  let html = `<div class="mb-4 flex items-center justify-between">
+      <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md">${ex.type}</span>
+      <span class="text-xs font-bold text-slate-400">Ejercicio ${currentExIndex + 1} de 5</span>
+    </div>
+    <h3 class="text-lg md:text-xl font-bold text-slate-800 mb-6">${ex.q}</h3>`;
 
-      html += `<div id="feedback" class="mt-6 hidden p-4 rounded-xl font-bold"></div>`;
-      html += `<div id="next-btn-container" class="mt-6 hidden text-right">
-                <button onclick="nextExercise()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-lg px-8 py-4 rounded-2xl shadow-lg transition-all transform hover:scale-105 inline-flex items-center gap-2">
-                  Siguiente Ejercicio ➔
-                </button>
-               </div>`;
+  if (ex.type === 'Listening') {
+    html += `<div class="mb-6 flex justify-center">
+        <button onclick="playAudio('${ex.text || ex.q}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 shadow-md">
+          🔊 Escuchar Audio
+        </button></div>`;
+  }
 
-      container.innerHTML = html;
-    }
+  if (ex.options) {
+    html += `<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">`;
+    ex.options.forEach((opt) => {
+      html += `<button onclick="checkAnswer('${opt.replace(/'/g, "\\'")}', '${ex.a.replace(/'/g, "\\'")}', '${ex.fb.replace(/'/g, "\\'")}', this)" class="opt-btn p-4 rounded-xl border-2 border-slate-200 font-bold text-slate-700 hover:border-indigo-400 hover:bg-indigo-50 transition-all text-left">${opt}</button>`;
+    });
+    html += `</div>`;
+  }
 
-    let selectedWords = [];
-    function addWord(w) {
-      if (isSolved) return;
-      selectedWords.push(w);
-      renderScrambleBox();
-    }
-    function clearWords() {
-      if (isSolved) return;
-      selectedWords = [];
-      renderScrambleBox();
-    }
-    function renderScrambleBox() {
-      const box = document.getElementById('scramble-box');
-      if (box) {
-        box.innerHTML = selectedWords.map(w => `<span class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-bold shadow-sm">${w}</span>`).join('');
-      }
-    }
+  html += `<div id="feedback" class="mt-6 hidden p-4 rounded-xl font-bold"></div>
+    <div id="next-btn-container" class="mt-6 hidden text-right">
+      <button onclick="nextExercise()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-lg px-8 py-4 rounded-2xl shadow-lg">
+        Siguiente Ejercicio ➔
+      </button>
+    </div>`;
 
-    function checkUnscramble(ans, fb) {
-      const userStr = selectedWords.join(' ');
-      checkOption(null, userStr, ans, fb);
-    }
+  container.innerHTML = html;
+}
 
-    function checkOption(btnElement, user, correct, fb) {
-      const feedback = document.getElementById('feedback');
-      const nextBtnContainer = document.getElementById('next-btn-container');
+function checkAnswer(userAns, correctAns, feedbackText, btn) {
+  if (isSolved) return;
+  const feedback = document.getElementById('feedback');
 
-      feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+  if (userAns === correctAns) {
+    isSolved = true;
+    profile.pts += 10;
+    saveProfile();
+    document.getElementById('pts-counter').textContent = profile.pts;
+    btn.className = "opt-btn p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-bold text-left";
+    feedback.className = "mt-6 p-4 rounded-xl font-bold bg-emerald-100 text-emerald-800";
+    feedback.innerHTML = `🎉 <strong>¡Correcto!</strong><br><span class="text-sm font-normal">${feedbackText}</span>`;
+    document.getElementById('next-btn-container').classList.remove('hidden');
+  } else {
+    btn.className = "opt-btn p-4 rounded-xl border-2 border-rose-400 bg-rose-50 text-rose-800 font-bold text-left shake";
+    feedback.className = "mt-6 p-4 rounded-xl font-bold bg-rose-100 text-rose-800";
+    feedback.innerHTML = `❌ <strong>Inténtalo de nuevo.</strong> ¡Tú puedes! 💪`;
+    feedback.classList.remove('hidden');
+  }
+}
 
-      if (user === correct) {
-        if (btnElement && btnElement.tagName === 'BUTTON') {
-          btnElement.className = "opt-btn p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-bold transition-all text-left shadow-sm";
-        }
-
-        feedback.classList.add('bg-emerald-100', 'text-emerald-800');
-        feedback.innerHTML = `🎉 <strong>¡Excelente! Respuesta correcta.</strong><br><span class="text-sm font-normal mt-1 block">${fb}</span>`;
-
-        if (!isSolved) {
-          pts += 10;
-          document.getElementById('pts-counter').innerText = `${pts} PTS`;
-          isSolved = true;
-        }
-
-        nextBtnContainer.classList.remove('hidden');
-
-      } else {
-        if (btnElement) {
-          btnElement.className = "opt-btn p-4 rounded-xl border-2 border-rose-400 bg-rose-50 text-rose-800 font-bold transition-all text-left shadow-sm";
-        }
-
-        feedback.classList.add('bg-rose-100', 'text-rose-800');
-        feedback.innerHTML = `❌ <strong>Inténtalo de nuevo.</strong> Esa opción no es correcta. ¡Selecciona otra opción!`;
-      }
-    }
-
-    // Init
-    renderNav();
+function nextExercise() {
+  if (currentExIndex < 4) {
+    currentExIndex++;
     updateUI();
-  </script>
+  } else {
+    showModal();
+  }
+}
+
+function showModal() {
+  document.getElementById('modal-title').textContent = `¡Fase ${currentDay} Completada!`;
+  document.getElementById('modal-msg').textContent = `Sumaste 50 puntos a tu cuenta de Edukinglish.`;
+  document.getElementById('modal').classList.remove('hidden');
+  document.getElementById('modal-btn').onclick = () => {
+    document.getElementById('modal').classList.add('hidden');
+    currentExIndex = 0;
+    if (currentDay < 3) currentDay++;
+    else { currentDay = 1; if (currentModule < 10) currentModule++; }
+    updateUI();
+  };
+}
+</script>
 </body>
 </html>
