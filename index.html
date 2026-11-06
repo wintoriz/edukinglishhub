@@ -134,10 +134,10 @@
 </div>
 
 <script>
-/* ================= DATOS LOCALES DE RESPALDO (FALLBACK) ================= */
-const exercisesDataLocal = {"1": {"1": [{"type": "Multiple Choice", "q": "Select the correct greeting for 8:00 AM", "a": "Good morning", "fb": "Good morning se usa desde temprano hasta el mediodía.", "options": ["Good morning", "Good night", "Goodbye"]}, {"type": "Listening", "q": "Listen. Escucha el audio y selecciona la respuesta a: What's your name?", "a": "My name is Alex", "fb": "My name is... se usa para decir tu nombre.", "text": "Listen. Escucha el audio y selecciona la respuesta a: What's your name?", "options": ["My name is Alex", "I am 10 years old", "I'm fine, thank you"]}, {"type": "Fill in the Blanks", "q": "Complete. Hello, my name ___ Kingly.", "a": "is", "fb": "Usamos 'is' con nombres singulares o He/She/It.", "options": ["is", "am", "are"]}, {"type": "Sentence Unscramble", "q": "Unscramble. Ordena las palabras para decir 'Gusto en conocerte'", "a": "Nice to meet you", "fb": "La forma correcta es: Nice + to + meet + you.", "words": ["meet", "Nice", "to", "you"]}, {"type": "Odd One Out", "q": "Odd One Out. Selecciona la palabra que no pertenece al grupo: Saludos matutinos y de bienvenida", "a": "Good night", "fb": "Good night' se usa para despedirse antes de ir a dormir, mientras que las demás son saludos de bienvenida.", "options": ["Good morning", "Hello", "Hi", "Good night"]}], "2": [{"type": "Multiple Choice", "q": "Select the correct greeting for 5:00 PM", "a": "Good afternoon", "fb": "Good afternoon se usa después de mediodía hasta antes que se ponga el sol.", "options": ["Good afternoon", "Good night", "Goodbye"]}, {"type": "Listening", "q": "Listen. Escucha el audio y selecciona la respuesta a: How are you?", "a": "I'm fine, thank you", "fb": "I'm fine, thank you... se usa para responder a un saludo.", "text": "Listen. Escucha el audio y selecciona la respuesta a: How are you?", "options": ["My name is Alex", "I am 10 years old", "I'm fine, thank you"]}, {"type": "Fill in the Blanks", "q": "Complete. Hello, my name ___ Kingly.", "a": "is", "fb": "Usamos 'is' con nombres singulares o He/She/It.", "options": ["is", "am", "are"]}, {"type": "Sentence Unscramble", "q": "Unscramble. Ordena las palabras para decir 'Él es Dogito'", "a": "He is Dogito", "fb": "La forma correcta es: He + is + Dogito.", "words": ["Dogito", "He", "is"]}, {"type": "Odd One Out", "q": "Odd One Out. Selecciona la palabra que no pertenece al grupo: Expresiones de cortesía y saludos", "a": "Pencil", "fb": "Pencil' (lápiz) es un útil escolar, mientras que las demás son saludos o estados de ánimo.", "options": ["Fine", "Great", "Good afternoon", "Pencil"]}], "3": [{"type": "Multiple Choice", "q": "Choose / Elige el pronombre correcto para una niña (She / Ella): \"___ is a doctor.\"", "a": "She", "fb": "Usamos 'She' para referirnos a una mujer o niña en singular.", "options": ["She", "He", "It"]}, {"type": "Listening", "q": "Listen / Escucha y selecciona la forma correcta del verbo To Be: \"They ___ my best friends.\"", "a": "are", "fb": "Usamos 'are' con los pronombres plurales como 'They' y 'We'.", "text": "They ___ my best friends.", "options": ["are", "is", "am"]}, {"type": "Fill in the Blanks", "q": "Complete / Completa: \"I ___ a happy student.\"", "a": "am", "fb": "El pronombre 'I' (yo) siempre se conjuga con 'am'.", "options": ["am", "is", "are"]}, {"type": "Sentence Unscramble", "q": "Unscramble / Ordena las palabras para formar la oración: \"He is my teacher.\"", "a": "He is my teacher", "fb": "La estructura básica en afirmativo es Sujeto (He) + Verbo (is) + Complemento (my teacher).", "words": ["teacher", "He", "my", "is"]}, {"type": "Odd One Out", "q": "Odd One Out. Selecciona la palabra que no pertenece al grupo: Pronombres personales", "a": "Table", "fb": "Table' (mesa) es un sustantivo de objeto inanimado, mientras que He, She y They son pronombres personales.", "options": ["He", "She", "They", "Table"]}]}};
+/* ================= ESTRUCTURA COMPLETA NIVEL A1 (TODOS LOS MÓDULOS) ================= */
+const exercisesDataLocal = {"1":{"1":[{"type":"Multiple Choice","q":"Select the correct greeting for 8:00 AM","a":"Good morning","fb":"Good morning se usa desde temprano hasta el mediodía.","options":["Good morning","Good night","Goodbye"]},{"type":"Listening","q":"Listen. Escucha el audio y selecciona la respuesta a: What's your name?","a":"My name is Alex","fb":"My name is... se usa para decir tu nombre.","text":"Listen. Escucha el audio y selecciona la respuesta a: What's your name?","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},{"type":"Fill in the Blanks","q":"Complete. Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares o He/She/It.","options":["is","am","are"]},{"type":"Sentence Unscramble","q":"Unscramble. Ordena las palabras para decir 'Gusto en conocerte'","a":"Nice to meet you","fb":"La forma correcta es: Nice + to + meet + you.","words":["meet","Nice","to","you"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Saludos matutinos y de bienvenida","a":"Good night","fb":"Good night' se usa para despedirse antes de ir a dormir, mientras que las demás son saludos de bienvenida.","options":["Good morning","Hello","Hi","Good night"]}],"2":[{"type":"Multiple Choice","q":"Select the correct greeting for 5:00 PM","a":"Good afternoon","fb":"Good afternoon se usa después de mediodía hasta antes que se ponga el sol.","options":["Good afternoon","Good night","Goodbye"]},{"type":"Listening","q":"Listen. Escucha el audio y selecciona la respuesta a: How are you?","a":"I'm fine, thank you","fb":"I'm fine, thank you... se usa para responder a un saludo.","text":"Listen. Escucha el audio y selecciona la respuesta a: How are you?","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},{"type":"Fill in the Blanks","q":"Complete. Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares o He/She/It.","options":["is","am","are"]},{"type":"Sentence Unscramble","q":"Unscramble. Ordena las palabras para decir 'Él es Dogito'","a":"He is Dogito","fb":"La forma correcta es: He + is + Dogito.","words":["Dogito","He","is"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Expresiones de cortesía y saludos","a":"Pencil","fb":"Pencil' (lápiz) es un útil escolar, mientras que las demás son saludos o estados de ánimo.","options":["Fine","Great","Good afternoon","Pencil"]}],"3":[{"type":"Multiple Choice","q":"Choose / Elige el pronombre correcto para una niña (She / Ella): \"___ is a doctor.\"","a":"She","fb":"Usamos 'She' para referirnos a una mujer o niña en singular.","options":["She","He","It"]},{"type":"Listening","q":"Listen / Escucha y selecciona la forma correcta del verbo To Be: \"They ___ my best friends.\"","a":"are","fb":"Usamos 'are' con los pronombres plurales como 'They' y 'We'.","text":"They ___ my best friends.","options":["are","is","am"]},{"type":"Fill in the Blanks","q":"Complete / Completa: \"I ___ a happy student.\"","a":"am","fb":"El pronombre 'I' (yo) siempre se conjuga con 'am'.","options":["am","is","are"]},{"type":"Sentence Unscramble","q":"Unscramble / Ordena las palabras para formar la oración: \"He is my teacher.\"","a":"He is my teacher","fb":"La estructura básica en afirmativo es Sujeto (He) + Verbo (is) + Complemento (my teacher).","words":["teacher","He","my","is"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Pronombres personales","a":"Table","fb":"Table' (mesa) es un sustantivo de objeto inanimado, mientras que He, She y They son pronombres personales.","options":["He","She","They","Table"]}]},"2":{"1":[{"type":"Multiple Choice","q":"Choose / Selecciona la escritura correcta del número 12 en inglés:","a":"Twelve","fb":"La palabra 'Twelve' corresponde al número 12, mientras que 'Twenty' es 20.","options":["Twelve","Twenty","Two"]},{"type":"Listening","q":"Listen / Escucha el número y selecciona la cifra correspondiente: \"Fifteen\"","a":"15","fb":"La palabra 'Fifteen' representa al número 15.","text":"Fifteen","options":["15","50","5"]},{"type":"Fill in the Blanks","q":"Complete / Completa la serie numérica: \"Eight, nine, ten, ___ (11).\"","a":"eleven","fb":"El número que sigue después del diez (ten) es once (eleven).","options":["eleven","seven","twelve"]},{"type":"Sentence Unscramble","q":"Unscramble / Ordena las palabras: \"I have three red apples.\"","a":"I have three red apples","fb":"Orden: Sujeto (I) + Verbo (have) + Cantidad (three) + Color (red) + Sustantivo (apples).","words":["three","apples","I","red","have"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Números en inglés","a":"Apple","fb":"La palabra 'Apple' es una fruta, mientras que Seven, Twelve y Fifteen son números.","options":["Seven","Twelve","Fifteen","Apple"]}],"2":[{"type":"Multiple Choice","q":"Choose / Elige la pregunta correcta para saber la edad de alguien:","a":"How old are you?","fb":"La pregunta 'How old are you?' se usa para preguntar la edad.","options":["How old are you?","How are you?","What is your name?"]},{"type":"Listening","q":"Listen / Escucha la respuesta y elige la opción que dice: \"I am ten years old.\"","a":"I am ten years old","fb":"En inglés se usa el verbo To Be ('I am...') para expresar la edad.","text":"I am ten years old.","options":["I am ten years old","I have ten years","I am two years old"]},{"type":"Fill in the Blanks","q":"Complete / Completa la respuesta: \"How old is Leo? - He ___ seven years old.\"","a":"is","fb":"Usamos 'is' porque el sujeto es 'He'.","options":["is","am","are"]},{"type":"Sentence Unscramble","q":"Unscramble / Ordena la oración: \"I am nine years old.\"","a":"I am nine years old","fb":"El orden correcto es: Pronombre (I) + am + Número (nine) + years old.","words":["old","years","am","nine","I"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Términos para expresar la edad","a":"Blue","fb":"'Blue' es un color, mientras que Years, Old y Age se refieren a la edad.","options":["Years","Old","Age","Blue"]}],"3":[{"type":"Multiple Choice","q":"Choose / ¿Qué color resulta al mezclar azul y amarillo? \"Blue + Yellow = ___\"","a":"Green","fb":"Blue + Yellow forman Green.","options":["Green","Purple","Orange"]},{"type":"Listening","q":"Listen / Escucha y selecciona el color del sol: \"The sun is yellow.\"","a":"Yellow","fb":"La palabra 'Yellow' significa amarillo.","text":"The sun is yellow.","options":["Yellow","Blue","Black"]},{"type":"Fill in the Blanks","q":"Complete / Completa con el color de las frutillas: \"Strawberries are ___.\"","a":"red","fb":"Las frutillas maduras son rojas ('red').","options":["red","green","white"]},{"type":"Sentence Unscramble","q":"Unscramble / Ordena la frase: \"My favorite color is blue.\"","a":"My favorite color is blue","fb":"Orden: Sujeto (My favorite color) + verbo (is) + color (blue).","words":["blue","favorite","My","is","color"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Colores","a":"Dog","fb":"'Dog' es un animal, mientras que Red, Blue y Yellow son colores.","options":["Red","Blue","Yellow","Dog"]}]},"3":{"1":[{"type":"Multiple Choice","q":"Choose / ¿Cómo se dice 'madre' en inglés?","a":"Mother","fb":"'Mother' o 'Mom' significa madre o mamá.","options":["Mother","Father","Brother"]},{"type":"Listening","q":"Listen / Escucha y selecciona a quién presenta la oración: \"This is my brother.\"","a":"Mi hermano","fb":"La palabra 'Brother' significa hermano.","text":"This is my brother.","options":["Mi hermano","Mi papá","Mi abuelo"]},{"type":"Fill in the Blanks","q":"Complete / Completa: \"My father's sister is my ___ (tía).\"","a":"aunt","fb":"La hermana de tu papá es tu tía ('aunt').","options":["aunt","sister","mother"]},{"type":"Sentence Unscramble","q":"Unscramble / Ordena las palabras: \"I love my family.\"","a":"I love my family","fb":"Sujeto (I) + Verbo (love) + Complemento (my family).","words":["family","love","my","I"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Miembros de la familia","a":"Book","fb":"'Book' es un objeto, mientras que Mother, Father y Sister son familiares.","options":["Mother","Father","Sister","Book"]}],"2":[{"type":"Multiple Choice","q":"Choose / ¿Qué animal dice 'woof woof'?","a":"Dog","fb":"La palabra 'Dog' es perro.","options":["Dog","Cat","Fish"]},{"type":"Listening","q":"Listen / Escucha y selecciona la mascota mencionada: \"I have a small cat.\"","a":"Cat","fb":"La palabra 'Cat' significa gato.","text":"I have a small cat.","options":["Cat","Rabbit","Turtle"]},{"type":"Fill in the Blanks","q":"Complete / Completa con el animal que vive en el agua: \"A gold___ swims in the bowl.\"","a":"fish","fb":"La palabra 'Fish' significa pez.","options":["fish","bird","dog"]},{"type":"Sentence Unscramble","q":"Unscramble / Ordena las palabras: \"My dog is very cute.\"","a":"My dog is very cute","fb":"Sujeto (My dog) + Verbo (is) + Adjetivo (very cute).","words":["cute","very","My","is","dog"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Mascotas domésticas","a":"Car","fb":"'Car' es un vehículo, mientras que Dog, Cat y Fish son mascotas.","options":["Dog","Cat","Fish","Car"]}],"3":[{"type":"Multiple Choice","q":"Choose / Elige el adjetivo posesivo para él: \"This is Lucas. That is ___ bicycle.\"","a":"his","fb":"Usamos 'his' para pertenencia de un hombre o niño.","options":["his","her","my"]},{"type":"Listening","q":"Listen / Escucha y selecciona el posesivo para ella: \"Emma is playing with ___ doll.\"","a":"her","fb":"Usamos 'her' para la posesión femenina.","text":"Emma is playing with ___ doll.","options":["her","his","your"]},{"type":"Fill in the Blanks","q":"Complete / Completa: \"What is ___ name? - My name is Carlos.\"","a":"your","fb":"La pregunta directa usa 'your' (tu nombre).","options":["your","our","their"]},{"type":"Sentence Unscramble","q":"Unscramble / Ordena la frase: \"Her cat is white.\"","a":"Her cat is white","fb":"Posesivo (Her) + Sustantivo (cat) + Verbo (is) + Adjetivo (white).","words":["is","cat","Her","white"]},{"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Adjetivos posesivos","a":"Run","fb":"'Run' es un verbo, mientras que My, Your y His son adjetivos posesivos.","options":["My","Your","His","Run"]}]}};
 
-/* Variable global que usará la app */
+/* Copia de respaldo global */
 let exercisesData = Object.assign({}, exercisesDataLocal);
 
 const SHEET_ID = '1ZkLlC-ZxplHHJoKlNPsU2rR9pQ1Aqt5_aOXQ0PJ__6Y';
@@ -151,11 +151,11 @@ let currentModule = 1, currentDay = 1, currentExIndex = 0;
 let isSolved = false, selectedWords = [];
 let profile = null;
 
-/* ================= CARGA DE DATOS ================= */
+/* ================= CARGA DE DATOS SEGUROLINK ================= */
 async function loadExercisesFromSheets() {
   try {
     const response = await fetch(CSV_URL);
-    if (!response.ok) throw new Error('No se pudo conectar a Google Sheets');
+    if (!response.ok) throw new Error('Error al conectar con Sheets');
     const csvText = await response.text();
     const rows = parseCSV(csvText);
     
@@ -190,7 +190,7 @@ async function loadExercisesFromSheets() {
       exercisesData = data;
     }
   } catch (e) {
-    console.warn("Usando datos locales por contingencia:", e);
+    console.warn("Usando base local de seguridad:", e);
     exercisesData = exercisesDataLocal;
   } finally {
     if (profile) updateUI();
@@ -345,7 +345,7 @@ function updateUI() {
   renderExercise();
 }
 
-/* ================= COMPONENTE DE LISTENING ================= */
+/* ================= RENDERIZADO DE EJERCICIOS ================= */
 function playAudio(text) {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
@@ -360,9 +360,16 @@ function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
 
 function renderExercise() {
   const container = document.getElementById('exercise-container');
-  const modData = exercisesData[currentModule] || {};
-  const dayData = modData[currentDay] || [];
-  const ex = dayData[currentExIndex];
+  
+  // Buscar en ejercicios de red o fallback local
+  let modData = exercisesData[currentModule] || (exercisesDataLocal[currentModule] || {});
+  let dayData = modData[currentDay] || [];
+  let ex = dayData[currentExIndex];
+
+  // Si no se encuentra en el módulo actual, usar fallback genérico para que NUNCA se congele
+  if (!ex && exercisesDataLocal["1"] && exercisesDataLocal["1"]["1"]) {
+    ex = exercisesDataLocal["1"]["1"][0];
+  }
 
   if (!ex) {
     container.innerHTML = `<p class="text-center text-slate-400 py-8 font-bold">Cargando ejercicios...</p>`;
@@ -440,7 +447,10 @@ function renderScrambleBox() {
   const box = document.getElementById('scramble-box');
   if (!box) return;
   box.innerHTML = selectedWords.map((wi, pos) => {
-    const w = (exercisesData[currentModule][currentDay][currentExIndex].words)[wi];
+    let modData = exercisesData[currentModule] || exercisesDataLocal[currentModule];
+    let dayData = modData[currentDay] || [];
+    let ex = dayData[currentExIndex];
+    const w = ex.words[wi];
     return `<button data-pos="${pos}" class="scramble-chip px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-bold shadow-sm hover:bg-rose-500 transition-colors" title="Quitar">✕ ${esc(w)}</button>`;
   }).join('');
   box.querySelectorAll('.scramble-chip').forEach(chip => {
@@ -457,7 +467,10 @@ function dayRecord() {
 
 function showSolvedState() {
   const feedback = document.getElementById('feedback');
-  const ex = exercisesData[currentModule][currentDay][currentExIndex];
+  let modData = exercisesData[currentModule] || exercisesDataLocal[currentModule];
+  let dayData = modData[currentDay] || [];
+  let ex = dayData[currentExIndex];
+
   feedback.className = 'mt-6 p-4 rounded-xl font-bold bg-emerald-100 text-emerald-800';
   feedback.innerHTML = `🎉 <strong>¡Excelente! Respuesta correcta.</strong><br><span class="text-sm font-normal mt-1 block">${esc(ex.fb)}</span>`;
   document.getElementById('next-btn-container').classList.remove('hidden');
@@ -479,7 +492,10 @@ function solveCorrect() {
 
 function checkOption(idx, btn) {
   if (isSolved) return;
-  const ex = exercisesData[currentModule][currentDay][currentExIndex];
+  let modData = exercisesData[currentModule] || exercisesDataLocal[currentModule];
+  let dayData = modData[currentDay] || [];
+  let ex = dayData[currentExIndex];
+
   if (ex.options[idx] === ex.a) {
     btn.className = "opt-btn p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-bold transition-all text-left shadow-sm";
     solveCorrect();
@@ -490,7 +506,10 @@ function checkOption(idx, btn) {
 
 function checkUnscramble() {
   if (isSolved) return;
-  const ex = exercisesData[currentModule][currentDay][currentExIndex];
+  let modData = exercisesData[currentModule] || exercisesDataLocal[currentModule];
+  let dayData = modData[currentDay] || [];
+  let ex = dayData[currentExIndex];
+
   const userStr = selectedWords.map(wi => ex.words[wi]).join(' ');
   if (userStr === ex.a) solveCorrect();
 }
