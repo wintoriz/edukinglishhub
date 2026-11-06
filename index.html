@@ -134,26 +134,26 @@
 </div>
 
 <script>
-/* ================= BANCO DE DATOS ROBUSTO NIVEL A1 ================= */
+/* ================= DATOS LOCALES ROBUSTOS NIVEL A1 ================= */
 const exercisesDataLocal = {
   "1": {
     "1": [
       {"type":"Multiple Choice","q":"Select the correct greeting for 8:00 AM","a":"Good morning","fb":"Good morning se usa desde temprano hasta el mediodía.","options":["Good morning","Good night","Goodbye"]},
-      {"type":"Listening","q":"Listen carefully to the audio:","a":"My name is Alex","fb":"'My name is...' se usa para decir tu nombre.","audioText":"What's your name?","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
+      {"type":"Listening","q":"Listen to the audio and select the correct answer to: What's your name?","a":"My name is Alex","fb":"'My name is Alex' es la respuesta correcta para decir tu nombre.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
       {"type":"Fill in the Blanks","q":"Complete: Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares.","options":["is","am","are"]},
       {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras para decir 'Gusto en conocerte'","a":"Nice to meet you","fb":"La forma correcta es: Nice + to + meet + you.","words":["meet","Nice","to","you"]},
       {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no pertenece a los saludos","a":"Good night","fb":"'Good night' es una despedida nocturna.","options":["Good morning","Hello","Hi","Good night"]}
     ],
     "2": [
       {"type":"Multiple Choice","q":"Select the correct greeting for 5:00 PM","a":"Good afternoon","fb":"Good afternoon se usa en la tarde.","options":["Good afternoon","Good night","Goodbye"]},
-      {"type":"Listening","q":"Listen carefully to the audio:","a":"I'm fine, thank you","fb":"'I'm fine, thank you' responde a cómo estás.","audioText":"How are you?","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
+      {"type":"Listening","q":"Listen to the audio and select the correct answer to: How are you?","a":"I'm fine, thank you","fb":"'I'm fine, thank you' es la respuesta adecuada.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
       {"type":"Fill in the Blanks","q":"Complete: Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con sustantivos singulares.","options":["is","am","are"]},
       {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras para decir 'Él es Dogito'","a":"He is Dogito","fb":"Estructura: He + is + Dogito.","words":["Dogito","He","is"]},
       {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es un saludo","a":"Pencil","fb":"'Pencil' es un útil escolar.","options":["Fine","Great","Good afternoon","Pencil"]}
     ],
     "3": [
       {"type":"Multiple Choice","q":"Choose the pronoun for a girl (Ella): \"___ is a doctor.\"","a":"She","fb":"Usamos 'She' para mujeres o niñas.","options":["She","He","It"]},
-      {"type":"Listening","q":"Listen carefully to the audio:","a":"are","fb":"Usamos 'are' con pronombres plurales como 'They'.","audioText":"They are my best friends.","options":["are","is","am"]},
+      {"type":"Listening","q":"Listen to the audio and select the missing verb: \"They ___ my best friends.\"","a":"are","fb":"Usamos 'are' con pronombres plurales como 'They'.","options":["are","is","am"]},
       {"type":"Fill in the Blanks","q":"Complete: \"I ___ a happy student.\"","a":"am","fb":"El pronombre 'I' siempre se conjuga con 'am'.","options":["am","is","are"]},
       {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras: \"He is my teacher.\"","a":"He is my teacher","fb":"Estructura: Sujeto + Verbo + Complemento.","words":["teacher","He","my","is"]},
       {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es pronombre","a":"Table","fb":"'Table' es un objeto.","options":["He","She","They","Table"]}
@@ -162,7 +162,7 @@ const exercisesDataLocal = {
   "2": {
     "1": [
       {"type":"Multiple Choice","q":"Choose the correct spelling for 12:","a":"Twelve","fb":"'Twelve' es el número 12 en inglés.","options":["Twelve","Twenty","Two"]},
-      {"type":"Listening","q":"Listen carefully to the audio:","a":"15","fb":"'Fifteen' es el número 15.","audioText":"Fifteen","options":["15","50","5"]},
+      {"type":"Listening","q":"Listen to the number:","a":"15","fb":"'Fifteen' es el número 15.","options":["15","50","5"]},
       {"type":"Fill in the Blanks","q":"Complete: \"Eight, nine, ten, ___ (11).\"","a":"eleven","fb":"El número que sigue al 10 es eleven.","options":["eleven","seven","twelve"]},
       {"type":"Sentence Unscramble","q":"Unscramble: \"I have three red apples.\"","a":"I have three red apples","fb":"Sujeto + Verbo + Cantidad + Color + Sustantivo.","words":["three","apples","I","red","have"]},
       {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es un número","a":"Apple","fb":"'Apple' es una fruta.","options":["Seven","Twelve","Fifteen","Apple"]}
@@ -170,7 +170,6 @@ const exercisesDataLocal = {
   }
 };
 
-/* URLs DE GOOGLE SHEETS PARA CONTENIDO Y ALUMNOS */
 const EXERCISES_SHEET_URL = `https://docs.google.com/spreadsheets/d/1ZkLlC-ZxplHHJoKlNPsU2rR9pQ1Aqt5_aOXQ0PJ__6Y/gviz/tq?tqx=out:csv&sheet=Hoja%201`;
 const STUDENTS_SHEET_URL  = `https://docs.google.com/spreadsheets/d/1YQlsfhsyaMw5XK8Vmh3g5dnJo6UeAG76OjLBejhmWmk/gviz/tq?tqx=out:csv&sheet=Hoja%201`;
 
@@ -187,7 +186,6 @@ let profile = null;
 
 /* ================= CONEXIÓN A SHEETS ================= */
 async function loadDataFromSheets() {
-  // Carga de Ejercicios
   try {
     const res = await fetch(EXERCISES_SHEET_URL);
     if (res.ok) {
@@ -207,16 +205,12 @@ async function loadDataFromSheets() {
         if (!data[m]) data[m] = {};
         if (!data[m][d]) data[m][d] = [];
 
-        // Extraer audio en limpio (eliminando instrucciones en español)
-        let cleanAudio = q.replace(/^Listen\.\s*/i, '').replace(/^Escucha\s*/i, '');
-
-        data[m][d].push({ type, q, a: ans, fb, options: rawOpts, words: rawOpts, audioText: cleanAudio });
+        data[m][d].push({ type, q, a: ans, fb, options: rawOpts, words: rawOpts });
       });
       if (Object.keys(data).length > 0) exercisesData = data;
     }
   } catch(e) { console.warn("Cargando ejercicios locales de respaldo."); }
 
-  // Carga de Lista de Alumnos desde "Control de suscriptores y progreso"
   try {
     const res = await fetch(STUDENTS_SHEET_URL);
     if (res.ok) {
@@ -261,7 +255,6 @@ function login() {
 
   if (!name) { err.textContent = '❌ Escribe tu nombre para empezar.'; err.classList.remove('hidden'); return; }
 
-  // Validar si el código existe en Sheets o en la lista local de respaldo
   const isValidRemote = remoteStudents.includes(code);
   const isValidLocal = ACCESS_CODES_FALLBACK.includes(code);
 
@@ -391,7 +384,7 @@ function updateUI() {
   renderExercise();
 }
 
-/* ================= OBTENCIÓN Y AUDIOS EN LIMPIO ================= */
+/* ================= OBTENCIÓN Y REPRODUCCIÓN DE AUDIO CORRECTO ================= */
 function getActiveExercise() {
   const m = String(currentModule);
   const d = String(currentDay);
@@ -405,22 +398,16 @@ function getActiveExercise() {
     q: "Select the correct option:",
     a: "Hello",
     fb: "¡Excelente!",
-    options: ["Hello", "Goodbye", "Good night"],
-    audioText: "Hello"
+    options: ["Hello", "Goodbye", "Good night"]
   };
 }
 
-function playAudio(text) {
+function playAudioTarget(textToRead) {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
-    // Limpieza estricta: lee únicamente la frase en inglés sin instrucciones en español
-    let cleanText = text.replace(/Listen\.\s*/gi, '')
-                        .replace(/Escucha\s*el\s*audio\s*y\s*selecciona\s*la\s*respuesta\s*a:\s*/gi, '')
-                        .replace(/Escucha\s*/gi, '');
-    
-    const u = new SpeechSynthesisUtterance(cleanText);
+    const u = new SpeechSynthesisUtterance(textToRead);
     u.lang = 'en-US'; 
-    u.rate = 0.85; // Velocidad pausada para alumnos
+    u.rate = 0.85; // Pronunciación clara y pausada
     window.speechSynthesis.speak(u);
   }
 }
@@ -446,7 +433,7 @@ function renderExercise() {
         <button id="btn-audio" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-8 py-4 rounded-2xl flex items-center gap-3 shadow-lg transition-all transform hover:scale-105 active:scale-95">
           <span class="text-2xl">🔊</span> Escuchar Audio
         </button>
-        <p class="text-xs font-bold text-indigo-400 mt-3">Haz clic para escuchar la pronunciación en inglés</p>
+        <p class="text-xs font-bold text-indigo-400 mt-3">Haz clic para escuchar la pronunciación correcta en inglés</p>
       </div>`;
   }
 
@@ -479,8 +466,9 @@ function renderExercise() {
 
   container.innerHTML = html;
 
+  // Asigna el audio para leer ÚNICAMENTE la respuesta correcta (ex.a)
   const audioBtn = document.getElementById('btn-audio');
-  if (audioBtn) audioBtn.onclick = () => playAudio(ex.audioText || ex.q);
+  if (audioBtn) audioBtn.onclick = () => playAudioTarget(ex.a);
 
   container.querySelectorAll('.opt-btn').forEach(btn => {
     btn.onclick = () => checkOption(parseInt(btn.dataset.oi), btn);
