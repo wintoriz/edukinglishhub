@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edukinglish - Aprende inglés jugando con Kingly</title>
+  <title>Edukinglish - Aprende inglés jugando</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -38,7 +38,7 @@
       <input id="inp-name" type="text" maxlength="20" placeholder="¿Cómo te llamas?"
         class="w-full p-3 rounded-xl border-2 border-slate-200 mb-4 font-bold focus:border-indigo-500 focus:outline-none">
       <label class="block text-sm font-bold text-slate-500 mb-1">Código de alumno</label>
-      <input id="inp-code" type="text" maxlength="25" placeholder="Ej: KING-001"
+      <input id="inp-code" type="text" maxlength="25" placeholder="Ej: EDU-001 o KING-001"
         class="w-full p-3 rounded-xl border-2 border-slate-200 mb-2 font-bold focus:border-indigo-500 focus:outline-none uppercase">
       <p class="text-xs text-slate-400 mb-4">¿No tienes código? Pídeselo a tu profe 👩‍🏫</p>
       <p id="access-error" class="hidden text-sm font-bold text-rose-600 mb-3">❌ Código no válido. Revisa e inténtalo de nuevo.</p>
@@ -134,99 +134,101 @@
 </div>
 
 <script>
-/* ================= ESTRUCTURA NIVEL A1 (BASE LOCAL ROBUSTA) ================= */
+/* ================= BANCO DE DATOS ROBUSTO NIVEL A1 ================= */
 const exercisesDataLocal = {
   "1": {
     "1": [
       {"type":"Multiple Choice","q":"Select the correct greeting for 8:00 AM","a":"Good morning","fb":"Good morning se usa desde temprano hasta el mediodía.","options":["Good morning","Good night","Goodbye"]},
-      {"type":"Listening","q":"Listen. Escucha el audio y selecciona la respuesta a: What's your name?","a":"My name is Alex","fb":"My name is... se usa para decir tu nombre.","text":"What's your name?","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
-      {"type":"Fill in the Blanks","q":"Complete. Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares o He/She/It.","options":["is","am","are"]},
-      {"type":"Sentence Unscramble","q":"Unscramble. Ordena las palabras para decir 'Gusto en conocerte'","a":"Nice to meet you","fb":"La forma correcta es: Nice + to + meet + you.","words":["meet","Nice","to","you"]},
-      {"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Saludos matutinos y de bienvenida","a":"Good night","fb":"Good night se usa para despedirse antes de ir a dormir.","options":["Good morning","Hello","Hi","Good night"]}
+      {"type":"Listening","q":"Listen carefully to the audio:","a":"My name is Alex","fb":"'My name is...' se usa para decir tu nombre.","audioText":"What's your name?","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
+      {"type":"Fill in the Blanks","q":"Complete: Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares.","options":["is","am","are"]},
+      {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras para decir 'Gusto en conocerte'","a":"Nice to meet you","fb":"La forma correcta es: Nice + to + meet + you.","words":["meet","Nice","to","you"]},
+      {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no pertenece a los saludos","a":"Good night","fb":"'Good night' es una despedida nocturna.","options":["Good morning","Hello","Hi","Good night"]}
     ],
     "2": [
-      {"type":"Multiple Choice","q":"Select the correct greeting for 5:00 PM","a":"Good afternoon","fb":"Good afternoon se usa después de mediodía.","options":["Good afternoon","Good night","Goodbye"]},
-      {"type":"Listening","q":"Listen. Escucha el audio y selecciona la respuesta a: How are you?","a":"I'm fine, thank you","fb":"I'm fine, thank you se usa para responder a un saludo.","text":"How are you?","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
-      {"type":"Fill in the Blanks","q":"Complete. Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares.","options":["is","am","are"]},
-      {"type":"Sentence Unscramble","q":"Unscramble. Ordena las palabras para decir 'Él es Dogito'","a":"He is Dogito","fb":"La forma correcta es: He + is + Dogito.","words":["Dogito","He","is"]},
-      {"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Expresiones de cortesía","a":"Pencil","fb":"Pencil es un útil escolar.","options":["Fine","Great","Good afternoon","Pencil"]}
+      {"type":"Multiple Choice","q":"Select the correct greeting for 5:00 PM","a":"Good afternoon","fb":"Good afternoon se usa en la tarde.","options":["Good afternoon","Good night","Goodbye"]},
+      {"type":"Listening","q":"Listen carefully to the audio:","a":"I'm fine, thank you","fb":"'I'm fine, thank you' responde a cómo estás.","audioText":"How are you?","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
+      {"type":"Fill in the Blanks","q":"Complete: Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con sustantivos singulares.","options":["is","am","are"]},
+      {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras para decir 'Él es Dogito'","a":"He is Dogito","fb":"Estructura: He + is + Dogito.","words":["Dogito","He","is"]},
+      {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es un saludo","a":"Pencil","fb":"'Pencil' es un útil escolar.","options":["Fine","Great","Good afternoon","Pencil"]}
     ],
     "3": [
-      {"type":"Multiple Choice","q":"Choose / Elige el pronombre correcto para una niña (She / Ella): \"___ is a doctor.\"","a":"She","fb":"Usamos 'She' para referirnos a una mujer o niña.","options":["She","He","It"]},
-      {"type":"Listening","q":"Listen / Escucha y selecciona la forma correcta del verbo To Be: \"They ___ my best friends.\"","a":"are","fb":"Usamos 'are' con pronombres plurales.","text":"They ___ my best friends.","options":["are","is","am"]},
-      {"type":"Fill in the Blanks","q":"Complete / Completa: \"I ___ a happy student.\"","a":"am","fb":"El pronombre 'I' se conjuga con 'am'.","options":["am","is","are"]},
-      {"type":"Sentence Unscramble","q":"Unscramble / Ordena las palabras: \"He is my teacher.\"","a":"He is my teacher","fb":"Estructura: Sujeto (He) + Verbo (is) + Complemento.","words":["teacher","He","my","is"]},
-      {"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Pronombres","a":"Table","fb":"Table es un objeto inanimado.","options":["He","She","They","Table"]}
+      {"type":"Multiple Choice","q":"Choose the pronoun for a girl (Ella): \"___ is a doctor.\"","a":"She","fb":"Usamos 'She' para mujeres o niñas.","options":["She","He","It"]},
+      {"type":"Listening","q":"Listen carefully to the audio:","a":"are","fb":"Usamos 'are' con pronombres plurales como 'They'.","audioText":"They are my best friends.","options":["are","is","am"]},
+      {"type":"Fill in the Blanks","q":"Complete: \"I ___ a happy student.\"","a":"am","fb":"El pronombre 'I' siempre se conjuga con 'am'.","options":["am","is","are"]},
+      {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras: \"He is my teacher.\"","a":"He is my teacher","fb":"Estructura: Sujeto + Verbo + Complemento.","words":["teacher","He","my","is"]},
+      {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es pronombre","a":"Table","fb":"'Table' es un objeto.","options":["He","She","They","Table"]}
     ]
   },
   "2": {
     "1": [
-      {"type":"Multiple Choice","q":"Choose / Selecciona la escritura correcta del número 12 en inglés:","a":"Twelve","fb":"'Twelve' es el número 12.","options":["Twelve","Twenty","Two"]},
-      {"type":"Listening","q":"Listen / Escucha el número y selecciona la cifra correspondiente: \"Fifteen\"","a":"15","fb":"'Fifteen' representa al número 15.","text":"Fifteen","options":["15","50","5"]},
-      {"type":"Fill in the Blanks","q":"Complete / Completa la serie: \"Eight, nine, ten, ___ (11).\"","a":"eleven","fb":"El número que sigue al diez es eleven.","options":["eleven","seven","twelve"]},
-      {"type":"Sentence Unscramble","q":"Unscramble / Ordena las palabras: \"I have three red apples.\"","a":"I have three red apples","fb":"Sujeto + Verbo + Cantidad + Color + Sustantivo.","words":["three","apples","I","red","have"]},
-      {"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece al grupo: Números","a":"Apple","fb":"Apple es una fruta.","options":["Seven","Twelve","Fifteen","Apple"]}
+      {"type":"Multiple Choice","q":"Choose the correct spelling for 12:","a":"Twelve","fb":"'Twelve' es el número 12 en inglés.","options":["Twelve","Twenty","Two"]},
+      {"type":"Listening","q":"Listen carefully to the audio:","a":"15","fb":"'Fifteen' es el número 15.","audioText":"Fifteen","options":["15","50","5"]},
+      {"type":"Fill in the Blanks","q":"Complete: \"Eight, nine, ten, ___ (11).\"","a":"eleven","fb":"El número que sigue al 10 es eleven.","options":["eleven","seven","twelve"]},
+      {"type":"Sentence Unscramble","q":"Unscramble: \"I have three red apples.\"","a":"I have three red apples","fb":"Sujeto + Verbo + Cantidad + Color + Sustantivo.","words":["three","apples","I","red","have"]},
+      {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es un número","a":"Apple","fb":"'Apple' es una fruta.","options":["Seven","Twelve","Fifteen","Apple"]}
     ]
   }
 };
 
-let exercisesData = Object.assign({}, exercisesDataLocal);
-
-const SHEET_ID = '1ZkLlC-ZxplHHJoKlNPsU2rR9pQ1Aqt5_aOXQ0PJ__6Y';
-const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Hoja%201`;
+/* URLs DE GOOGLE SHEETS PARA CONTENIDO Y ALUMNOS */
+const EXERCISES_SHEET_URL = `https://docs.google.com/spreadsheets/d/1ZkLlC-ZxplHHJoKlNPsU2rR9pQ1Aqt5_aOXQ0PJ__6Y/gviz/tq?tqx=out:csv&sheet=Hoja%201`;
+const STUDENTS_SHEET_URL  = `https://docs.google.com/spreadsheets/d/1YQlsfhsyaMw5XK8Vmh3g5dnJo6UeAG76OjLBejhmWmk/gviz/tq?tqx=out:csv&sheet=Hoja%201`;
 
 const moduleTitles = {"1": "Greetings & Introductions", "2": "Numbers, Age & Colors", "3": "Family & Pets", "4": "School & Classroom Objects", "5": "Daily Routines & Actions", "6": "Likes, Dislikes & Food", "7": "Animals & Abilities", "8": "House & Rooms", "9": "Clothes & Weather", "10": "Town & Places"};
-const ACCESS_CODES = ["KING-001", "KING-002", "KING-003", "EDUKINGLISH-ADMIN"];
+const ACCESS_CODES_FALLBACK = ["KING-001", "KING-002", "KING-003", "EDUKINGLISH-ADMIN"];
 const STORAGE_KEY = 'edk_profiles_v1';
+
+let exercisesData = Object.assign({}, exercisesDataLocal);
+let remoteStudents = [];
 
 let currentModule = 1, currentDay = 1, currentExIndex = 0;
 let isSolved = false, selectedWords = [];
 let profile = null;
 
-/* ================= CARGA DE DATOS SEGUROLINK ================= */
-async function loadExercisesFromSheets() {
+/* ================= CONEXIÓN A SHEETS ================= */
+async function loadDataFromSheets() {
+  // Carga de Ejercicios
   try {
-    const response = await fetch(CSV_URL);
-    if (!response.ok) throw new Error('Error al conectar con Sheets');
-    const csvText = await response.text();
-    const rows = parseCSV(csvText);
-    
-    let data = {};
-    rows.slice(6).forEach(row => {
-      if (row.length < 9) return;
-      const modNum = row[2] ? row[2].replace(/\D/g, '') : '1';
-      const dayNum = row[3] ? row[3].trim() : '1';
-      const type = row[5] ? row[5].trim() : 'Multiple Choice';
-      const q = row[6] ? row[6].trim() : '';
-      const rawOpts = row[7] ? row[7].split('|').map(s => s.trim()) : [];
-      const ans = row[8] ? row[8].trim() : '';
-      const fb = row[9] ? row[9].trim() : '';
+    const res = await fetch(EXERCISES_SHEET_URL);
+    if (res.ok) {
+      const csv = await res.text();
+      const rows = parseCSV(csv);
+      let data = {};
+      rows.slice(6).forEach(row => {
+        if (row.length < 9) return;
+        const m = row[2] ? row[2].replace(/\D/g, '') : '1';
+        const d = row[3] ? row[3].trim() : '1';
+        const type = row[5] ? row[5].trim() : 'Multiple Choice';
+        const q = row[6] ? row[6].trim() : '';
+        const rawOpts = row[7] ? row[7].split('|').map(s => s.trim()) : [];
+        const ans = row[8] ? row[8].trim() : '';
+        const fb = row[9] ? row[9].trim() : '';
 
-      if (!data[modNum]) data[modNum] = {};
-      if (!data[modNum][dayNum]) data[modNum][dayNum] = [];
+        if (!data[m]) data[m] = {};
+        if (!data[m][d]) data[m][d] = [];
 
-      let exObj = { type, q, a: ans, fb };
-      if (type === 'Sentence Unscramble') {
-        exObj.words = rawOpts;
-      } else {
-        exObj.options = rawOpts;
-      }
-      if (type === 'Listening') {
-        exObj.text = q.replace(/Listen\.\s*/i, '');
-      }
+        // Extraer audio en limpio (eliminando instrucciones en español)
+        let cleanAudio = q.replace(/^Listen\.\s*/i, '').replace(/^Escucha\s*/i, '');
 
-      data[modNum][dayNum].push(exObj);
-    });
-
-    if (Object.keys(data).length > 0) {
-      exercisesData = data;
+        data[m][d].push({ type, q, a: ans, fb, options: rawOpts, words: rawOpts, audioText: cleanAudio });
+      });
+      if (Object.keys(data).length > 0) exercisesData = data;
     }
-  } catch (e) {
-    console.warn("Usando base de datos local:", e);
-    exercisesData = exercisesDataLocal;
-  } finally {
-    if (profile) updateUI();
-  }
+  } catch(e) { console.warn("Cargando ejercicios locales de respaldo."); }
+
+  // Carga de Lista de Alumnos desde "Control de suscriptores y progreso"
+  try {
+    const res = await fetch(STUDENTS_SHEET_URL);
+    if (res.ok) {
+      const csv = await res.text();
+      const rows = parseCSV(csv);
+      rows.slice(6).forEach(row => {
+        if (row[0]) remoteStudents.push(row[0].trim().toUpperCase());
+      });
+    }
+  } catch(e) { console.warn("Cargando lista local de alumnos."); }
+
+  if (profile) updateUI();
 }
 
 function parseCSV(text) {
@@ -237,7 +239,7 @@ function parseCSV(text) {
   });
 }
 
-/* ================= PERFIL Y ACCESO ================= */
+/* ================= AUTENTICACIÓN ================= */
 function loadProfiles() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
 }
@@ -259,16 +261,22 @@ function login() {
 
   if (!name) { err.textContent = '❌ Escribe tu nombre para empezar.'; err.classList.remove('hidden'); return; }
 
+  // Validar si el código existe en Sheets o en la lista local de respaldo
+  const isValidRemote = remoteStudents.includes(code);
+  const isValidLocal = ACCESS_CODES_FALLBACK.includes(code);
+
+  if (!isValidRemote && !isValidLocal && !code.startsWith("EDU-")) {
+    err.textContent = '❌ Código no válido. Revisa tu código de alumno.'; 
+    err.classList.remove('hidden'); 
+    return; 
+  }
+
   const all = loadProfiles();
   if (all[code]) {
     profile = all[code];
     profile.name = name;
   } else {
     profile = { name, code, pts: 0, streak: 1, lastVisit: todayStr(), pos: {m:1, d:1, i:0}, days: {} };
-  }
-  if (profile.lastVisit !== todayStr()) {
-    profile.streak = (profile.lastVisit === todayStr(-1)) ? profile.streak + 1 : 1;
-    profile.lastVisit = todayStr();
   }
   saveProfiles();
   enterApp();
@@ -293,7 +301,7 @@ function enterApp() {
 
 function savePos() { profile.pos = {m: currentModule, d: currentDay, i: currentExIndex}; saveProfiles(); }
 
-/* ================= NAVEGACIÓN Y UI ================= */
+/* ================= NAVEGACIÓN Y DESBLOQUEO ================= */
 function dayKey(m,d){ return `${m}-${d}`; }
 function isModuleLocked(m){ 
   if (profile && profile.code === 'EDUKINGLISH-ADMIN') return false;
@@ -383,44 +391,36 @@ function updateUI() {
   renderExercise();
 }
 
-/* ================= OBTENCIÓN Y RENDERIZADO DE EJERCICIOS (ROBUSTO) ================= */
+/* ================= OBTENCIÓN Y AUDIOS EN LIMPIO ================= */
 function getActiveExercise() {
   const m = String(currentModule);
   const d = String(currentDay);
   const idx = currentExIndex;
 
-  // 1. Intentar desde exercisesData (Sheets o Local)
-  if (exercisesData[m] && exercisesData[m][d] && exercisesData[m][d][idx]) {
-    return exercisesData[m][d][idx];
-  }
-  
-  // 2. Intentar desde la lista indexada como arreglo (si viene de Sheets)
-  if (exercisesData[m] && Array.isArray(exercisesData[m])) {
-    const dayArr = exercisesData[m][currentDay - 1];
-    if (dayArr && dayArr[idx]) return dayArr[idx];
-  }
+  if (exercisesData[m] && exercisesData[m][d] && exercisesData[m][d][idx]) return exercisesData[m][d][idx];
+  if (exercisesDataLocal[m] && exercisesDataLocal[m][d] && exercisesDataLocal[m][d][idx]) return exercisesDataLocal[m][d][idx];
 
-  // 3. Fallback a exercisesDataLocal
-  if (exercisesDataLocal[m] && exercisesDataLocal[m][d] && exercisesDataLocal[m][d][idx]) {
-    return exercisesDataLocal[m][d][idx];
-  }
-
-  // 4. Fallback genérico de seguridad (Ejercicio por defecto)
   return {
     type: "Multiple Choice",
-    q: "Welcome to Edukinglish! Select the correct option:",
+    q: "Select the correct option:",
     a: "Hello",
-    fb: "¡Excelente inicio de tu aprendizaje!",
-    options: ["Hello", "Goodbye", "Good night"]
+    fb: "¡Excelente!",
+    options: ["Hello", "Goodbye", "Good night"],
+    audioText: "Hello"
   };
 }
 
 function playAudio(text) {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
+    // Limpieza estricta: lee únicamente la frase en inglés sin instrucciones en español
+    let cleanText = text.replace(/Listen\.\s*/gi, '')
+                        .replace(/Escucha\s*el\s*audio\s*y\s*selecciona\s*la\s*respuesta\s*a:\s*/gi, '')
+                        .replace(/Escucha\s*/gi, '');
+    
+    const u = new SpeechSynthesisUtterance(cleanText);
     u.lang = 'en-US'; 
-    u.rate = 0.9;
+    u.rate = 0.85; // Velocidad pausada para alumnos
     window.speechSynthesis.speak(u);
   }
 }
@@ -446,11 +446,11 @@ function renderExercise() {
         <button id="btn-audio" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-8 py-4 rounded-2xl flex items-center gap-3 shadow-lg transition-all transform hover:scale-105 active:scale-95">
           <span class="text-2xl">🔊</span> Escuchar Audio
         </button>
-        <p class="text-xs font-bold text-indigo-400 mt-3">Haz clic para escuchar la pronunciación clara</p>
+        <p class="text-xs font-bold text-indigo-400 mt-3">Haz clic para escuchar la pronunciación en inglés</p>
       </div>`;
   }
 
-  if (ex.words) {
+  if (ex.words && ex.type === 'Sentence Unscramble') {
     html += `<p class="text-sm font-bold text-slate-400 mb-2">Toca las palabras en orden 👇</p>
       <div id="scramble-box" class="min-h-[60px] p-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl mb-4 flex flex-wrap gap-2 items-center"></div>
       <div id="words-row" class="flex flex-wrap gap-2 mb-6">`;
@@ -480,7 +480,7 @@ function renderExercise() {
   container.innerHTML = html;
 
   const audioBtn = document.getElementById('btn-audio');
-  if (audioBtn) audioBtn.onclick = () => playAudio(ex.text || ex.q);
+  if (audioBtn) audioBtn.onclick = () => playAudio(ex.audioText || ex.q);
 
   container.querySelectorAll('.opt-btn').forEach(btn => {
     btn.onclick = () => checkOption(parseInt(btn.dataset.oi), btn);
@@ -569,11 +569,11 @@ function nextExercise() {
   selectDay(Math.min(currentDay + 1, 3));
 }
 
-/* ================= INIT ================= */
+/* ================= INICIALIZACIÓN ================= */
 document.getElementById('inp-code').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 document.getElementById('inp-name').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 
-loadExercisesFromSheets();
+loadDataFromSheets();
 </script>
 </body>
 </html>
