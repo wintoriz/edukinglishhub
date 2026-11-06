@@ -11,10 +11,6 @@
     h1, h2, h3, .font-heading { font-family: 'Fredoka', cursive; }
     .bounce-in { animation: bounceIn .5s ease; }
     @keyframes bounceIn { 0%{transform:scale(.7);opacity:0} 60%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
-    .shake { animation: shake .4s ease; }
-    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-    .pop { animation: pop .3s ease; }
-    @keyframes pop { 0%,100%{transform:scale(.6)} 80%{transform:scale(1.15)} 100%{transform:scale(1)} }
     .float-slow { animation: floaty 3s ease-in-out infinite; }
     @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
   </style>
@@ -29,8 +25,6 @@
       <h1 class="text-4xl font-bold text-amber-400">Edukinglish</h1>
       <p class="text-indigo-200 mt-1">¡Aprende inglés jugando con Kingly!</p>
     </div>
-
-    <div id="continue-box" class="hidden mb-4"></div>
 
     <div class="bg-white rounded-3xl shadow-2xl p-8">
       <h2 class="text-xl font-bold text-slate-800 mb-4">Inicia tu aventura 🚀</h2>
@@ -120,52 +114,23 @@
   </main>
 </div>
 
-<!-- ============ MODAL DE CELEBRACIÓN ============ -->
-<div id="modal" class="hidden fixed inset-0 bg-slate-900/70 flex items-center justify-center p-4 z-50">
-  <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center bounce-in">
-    <div class="text-6xl mb-3" id="modal-emoji">🎉</div>
-    <h2 class="text-2xl font-bold text-slate-800 mb-1" id="modal-title">¡Día completado!</h2>
-    <div class="text-4xl my-3 tracking-widest" id="modal-stars">⭐⭐⭐</div>
-    <p class="text-slate-500 font-semibold mb-6" id="modal-msg"></p>
-    <button id="modal-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-lg py-4 rounded-2xl shadow-lg transition-all transform hover:scale-105">
-      Continuar ➔
-    </button>
-  </div>
-</div>
-
 <script>
 /* ================= DATOS LOCALES ROBUSTOS NIVEL A1 ================= */
 const exercisesDataLocal = {
   "1": {
     "1": [
       {"type":"Multiple Choice","q":"Select the correct greeting for 8:00 AM","a":"Good morning","fb":"Good morning se usa desde temprano hasta el mediodía.","options":["Good morning","Good night","Goodbye"]},
-      {"type":"Listening","q":"Listen: What's your name?","a":"My name is Alex","fb":"'My name is Alex' es la respuesta correcta.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
-      {"type":"Fill in the Blanks","q":"Complete: Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares.","options":["is","am","are"]},
-      {"type":"Sentence Unscramble","q":"Unscramble: Nice to meet you","a":"Nice to meet you","fb":"La forma correcta es: Nice + to + meet + you.","words":["meet","Nice","to","you"]},
-      {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no pertenece a los saludos","a":"Good night","fb":"'Good night' es una despedida nocturna.","options":["Good morning","Hello","Hi","Good night"]}
+      {"type":"Listening","q":"Listen. Escucha el audio y selecciona la respuesta a: What's your name?","a":"My name is Alex","fb":"'My name is Alex' es la respuesta correcta.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
+      {"type":"Fill in the Blanks","q":"Complete. Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares.","options":["is","am","are"]},
+      {"type":"Sentence Unscramble","q":"Unscramble. Ordena las palabras para decir 'Gusto en conocerte'","a":"Nice to meet you","fb":"La forma correcta es: Nice + to + meet + you.","words":["meet","Nice","to","you"]},
+      {"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no pertenece a los saludos","a":"Good night","fb":"'Good night' es una despedida nocturna.","options":["Good morning","Hello","Hi","Good night"]}
     ],
     "2": [
       {"type":"Multiple Choice","q":"Select the correct greeting for 5:00 PM","a":"Good afternoon","fb":"Good afternoon se usa en la tarde.","options":["Good afternoon","Good night","Goodbye"]},
-      {"type":"Listening","q":"Listen: How are you?","a":"I'm fine, thank you","fb":"'I'm fine, thank you' es la respuesta adecuada.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
-      {"type":"Fill in the Blanks","q":"Complete: Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con sustantivos singulares.","options":["is","am","are"]},
-      {"type":"Sentence Unscramble","q":"Unscramble: He is Dogito","a":"He is Dogito","fb":"Estructura: He + is + Dogito.","words":["Dogito","He","is"]},
-      {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es un saludo","a":"Pencil","fb":"'Pencil' es un útil escolar.","options":["Fine","Great","Good afternoon","Pencil"]}
-    ],
-    "3": [
-      {"type":"Multiple Choice","q":"Choose the pronoun for a girl (Ella): \"___ is a doctor.\"","a":"She","fb":"Usamos 'She' para mujeres o niñas.","options":["She","He","It"]},
-      {"type":"Listening","q":"Listen: They ___ my best friends.","a":"are","fb":"Usamos 'are' con pronombres plurales como 'They'.","options":["are","is","am"]},
-      {"type":"Fill in the Blanks","q":"Complete: \"I ___ a happy student.\"","a":"am","fb":"El pronombre 'I' siempre se conjuga con 'am'.","options":["am","is","are"]},
-      {"type":"Sentence Unscramble","q":"Unscramble: He is my teacher.","a":"He is my teacher","fb":"Estructura: Sujeto + Verbo + Complemento.","words":["teacher","He","my","is"]},
-      {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es pronombre","a":"Table","fb":"'Table' es un objeto.","options":["He","She","They","Table"]}
-    ]
-  },
-  "2": {
-    "1": [
-      {"type":"Multiple Choice","q":"Choose the correct spelling for 12:","a":"Twelve","fb":"'Twelve' es el número 12 en inglés.","options":["Twelve","Twenty","Two"]},
-      {"type":"Listening","q":"Listen: Fifteen","a":"Fifteen","fb":"'Fifteen' es el número 15.","options":["15","50","5"]},
-      {"type":"Fill in the Blanks","q":"Complete: Eight, nine, ten, ___ eleven.","a":"eleven","fb":"El número que sigue al 10 es eleven.","options":["eleven","seven","twelve"]},
-      {"type":"Sentence Unscramble","q":"Unscramble: I have three red apples.","a":"I have three red apples","fb":"Sujeto + Verbo + Cantidad + Color + Sustantivo.","words":["three","apples","I","red","have"]},
-      {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es un número","a":"Apple","fb":"'Apple' es una fruta.","options":["Seven","Twelve","Fifteen","Apple"]}
+      {"type":"Listening","q":"Listen. Escucha el audio y selecciona la respuesta a: How are you?","a":"I'm fine, thank you","fb":"'I'm fine, thank you' es la respuesta adecuada.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
+      {"type":"Fill in the Blanks","q":"Complete. Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con sustantivos singulares.","options":["is","am","are"]},
+      {"type":"Sentence Unscramble","q":"Unscramble. Ordena las palabras para decir 'Él es Dogito'","a":"He is Dogito","fb":"Estructura: He + is + Dogito.","words":["Dogito","He","is"]},
+      {"type":"Odd One Out","q":"Odd One Out. Selecciona la palabra que no es un saludo","a":"Pencil","fb":"'Pencil' es un útil escolar.","options":["Fine","Great","Good afternoon","Pencil"]}
     ]
   }
 };
@@ -384,7 +349,7 @@ function updateUI() {
   renderExercise();
 }
 
-/* ================= CONSTRUCTOR DE ORACIÓN COMPLETA ================= */
+/* ================= EXTRACCIÓN Y LIMPIEZA AUTOMÁTICA DE AUDIOS ================= */
 function getActiveExercise() {
   const m = String(currentModule);
   const d = String(currentDay);
@@ -402,38 +367,46 @@ function getActiveExercise() {
   };
 }
 
-function getFullSentenceToRead(ex) {
+// Extrae la oración limpia en inglés sustituyendo faltantes y quitando instrucciones en español
+function extractCleanSentence(ex) {
   if (!ex) return "";
+  let raw = ex.q || "";
 
-  let questionText = ex.q || "";
-
-  // 1. Quitar instrucciones en español o inglés al inicio de la pregunta
-  questionText = questionText.replace(/^(Complete|Listen|Choose|Select|Unscramble|Odd One Out|Escucha|Completa|Elige|Selecciona|Ordena)[\s\:\.\-]*/gi, '')
-                             .replace(/Listen carefully to the audio and select the answer:?\s*/gi, '')
-                             .replace(/Ordena las palabras para decir\s*['"].*?['"]/gi, '')
-                             .replace(/\(.*?\)/g, ''); // Elimina aclaraciones parentéticas
-
-  // 2. Si la pregunta contiene guiones bajos (espacio a completar), los reemplazamos directamente con la respuesta correcta (ex.a)
-  if (/_+/.test(questionText)) {
-    return questionText.replace(/_+/g, ex.a).trim();
+  // Extrae el texto después de dos puntos o tras las frases de instrucción
+  if (raw.includes(":")) {
+    const parts = raw.split(":");
+    raw = parts[parts.length - 1];
   }
 
-  // 3. Si no tiene guiones pero la respuesta (ex.a) no está contenida en el texto, las unimos de forma natural
-  if (ex.a && !questionText.toLowerCase().includes(ex.a.toLowerCase())) {
-    return (questionText + " " + ex.a).trim();
+  // Quitar etiquetas tipo Choose / Elige, Complete, Listen, Unscramble, etc.
+  raw = raw.replace(/^(Complete|Listen|Choose|Select|Unscramble|Odd One Out|Escucha|Completa|Elige|Selecciona|Ordena)[\s\/\:\.\-]*/gi, '')
+           .replace(/Listen carefully to the audio and select the answer:?\s*/gi, '')
+           .replace(/Ordena las palabras para decir\s*['"].*?['"]/gi, '')
+           .replace(/Selecciona la palabra que no pertenece.*?:\s*/gi, '')
+           .replace(/\(.*?\)/g, ''); // Quitar paréntesis aclaratorios
+
+  // Reemplazar espacios a completar (___) con la palabra/respuesta correcta
+  if (/_+/.test(raw)) {
+    raw = raw.replace(/_+/g, ex.a);
+  } else if (ex.type === 'Fill in the Blanks' && ex.a && !raw.toLowerCase().includes(ex.a.toLowerCase())) {
+    raw = raw + " " + ex.a;
   }
 
-  // 4. Si la pregunta ya contiene la oración completa (como en Listening), la devolvemos limpia
-  return questionText.trim();
+  // Si tras limpiar la oración queda vacía, se reproduce la respuesta exacta
+  if (!raw.trim()) {
+    raw = ex.a || "";
+  }
+
+  return raw.replace(/["'“”]/g, '').trim();
 }
 
 function playCurrentAnswer() {
   if ('speechSynthesis' in window) {
     const ex = getActiveExercise();
-    const sentenceToPlay = getFullSentenceToRead(ex);
+    const cleanText = extractCleanSentence(ex);
 
     window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(sentenceToPlay);
+    const u = new SpeechSynthesisUtterance(cleanText);
     u.lang = 'en-US'; 
     u.rate = 0.85; 
     window.speechSynthesis.speak(u);
