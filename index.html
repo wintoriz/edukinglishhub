@@ -139,21 +139,21 @@ const exercisesDataLocal = {
   "1": {
     "1": [
       {"type":"Multiple Choice","q":"Select the correct greeting for 8:00 AM","a":"Good morning","fb":"Good morning se usa desde temprano hasta el mediodía.","options":["Good morning","Good night","Goodbye"]},
-      {"type":"Listening","q":"Listen carefully to the audio and select the answer:","a":"My name is Alex","fb":"'My name is Alex' es la respuesta correcta.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
+      {"type":"Listening","q":"Listen carefully to the audio and select the answer: What's your name?","a":"My name is Alex","fb":"'My name is Alex' es la respuesta correcta.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
       {"type":"Fill in the Blanks","q":"Complete: Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con nombres singulares.","options":["is","am","are"]},
       {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras para decir 'Gusto en conocerte'","a":"Nice to meet you","fb":"La forma correcta es: Nice + to + meet + you.","words":["meet","Nice","to","you"]},
       {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no pertenece a los saludos","a":"Good night","fb":"'Good night' es una despedida nocturna.","options":["Good morning","Hello","Hi","Good night"]}
     ],
     "2": [
       {"type":"Multiple Choice","q":"Select the correct greeting for 5:00 PM","a":"Good afternoon","fb":"Good afternoon se usa en la tarde.","options":["Good afternoon","Good night","Goodbye"]},
-      {"type":"Listening","q":"Listen carefully to the audio and select the answer:","a":"I'm fine, thank you","fb":"'I'm fine, thank you' es la respuesta adecuada.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
+      {"type":"Listening","q":"Listen carefully to the audio and select the answer: How are you?","a":"I'm fine, thank you","fb":"'I'm fine, thank you' es la respuesta adecuada.","options":["My name is Alex","I am 10 years old","I'm fine, thank you"]},
       {"type":"Fill in the Blanks","q":"Complete: Hello, my name ___ Kingly.","a":"is","fb":"Usamos 'is' con sustantivos singulares.","options":["is","am","are"]},
       {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras para decir 'Él es Dogito'","a":"He is Dogito","fb":"Estructura: He + is + Dogito.","words":["Dogito","He","is"]},
       {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es un saludo","a":"Pencil","fb":"'Pencil' es un útil escolar.","options":["Fine","Great","Good afternoon","Pencil"]}
     ],
     "3": [
       {"type":"Multiple Choice","q":"Choose the pronoun for a girl (Ella): \"___ is a doctor.\"","a":"She","fb":"Usamos 'She' para mujeres o niñas.","options":["She","He","It"]},
-      {"type":"Listening","q":"Listen carefully to the audio and select the verb:","a":"are","fb":"Usamos 'are' con pronombres plurales como 'They'.","options":["are","is","am"]},
+      {"type":"Listening","q":"Listen carefully to the audio and select the verb: They ___ my best friends.","a":"are","fb":"Usamos 'are' con pronombres plurales como 'They'.","options":["are","is","am"]},
       {"type":"Fill in the Blanks","q":"Complete: \"I ___ a happy student.\"","a":"am","fb":"El pronombre 'I' siempre se conjuga con 'am'.","options":["am","is","are"]},
       {"type":"Sentence Unscramble","q":"Unscramble: Ordena las palabras: \"He is my teacher.\"","a":"He is my teacher","fb":"Estructura: Sujeto + Verbo + Complemento.","words":["teacher","He","my","is"]},
       {"type":"Odd One Out","q":"Odd One Out: Selecciona la palabra que no es pronombre","a":"Table","fb":"'Table' es un objeto.","options":["He","She","They","Table"]}
@@ -384,7 +384,7 @@ function updateUI() {
   renderExercise();
 }
 
-/* ================= OBTENCIÓN Y REPRODUCCIÓN DE AUDIO DIRECTO ================= */
+/* ================= REPRODUCCIÓN DE ORACIÓN COMPLETA ================= */
 function getActiveExercise() {
   const m = String(currentModule);
   const d = String(currentDay);
@@ -402,17 +402,41 @@ function getActiveExercise() {
   };
 }
 
-// Función de voz global y directa
+// Limpia el texto de la pregunta e inserta la respuesta en lugar de la palabra faltante
+function cleanSentenceToRead(ex) {
+  if (!ex) return "";
+  
+  let targetText = ex.q || "";
+
+  // 1. Quitar instrucciones comunes
+  targetText = targetText.replace(/^(Complete|Listen|Choose|Select|Unscramble|Odd One Out)\s*[\/\.:\-]?\s*/gi, '')
+                         .replace(/^(Escucha|Completa|Elige|Selecciona|Ordena)\s*[\/\.:\-]?\s*/gi, '')
+                         .replace(/Listen carefully to the audio and select the answer:?\s*/gi, '')
+                         .replace(/Ordena las palabras para decir\s*['"].*?['"]/gi, '')
+                         .replace(/\(.*\)/g, ''); // Quitar aclaraciones entre paréntesis como (Ella) o (11)
+
+  // 2. Si es de completar espacio (___), sustituir por la respuesta correcta
+  if (targetText.includes("___")) {
+    targetText = targetText.replace(/___+/g, ex.a);
+  } else if (ex.type === 'Fill in the Blanks' && !targetText.toLowerCase().includes(ex.a.toLowerCase())) {
+    targetText = targetText + " " + ex.a;
+  }
+
+  // 3. Si por alguna razón la pregunta no contiene inglés suficiente, leer directamente la respuesta correcta
+  if (!targetText.trim() || targetText.length < 3) {
+    targetText = ex.a;
+  }
+
+  // Quitar comillas finales
+  return targetText.replace(/["'“”]/g, '').trim();
+}
+
 function playCurrentAnswer() {
   if ('speechSynthesis' in window) {
     const ex = getActiveExercise();
-    if (!ex || !ex.a) return;
-    
+    const textToRead = cleanSentenceToRead(ex);
+
     window.speechSynthesis.cancel();
-    
-    // Limpieza estricta de comillas o símbolos
-    let textToRead = String(ex.a).replace(/["'“”]/g, '').trim();
-    
     const u = new SpeechSynthesisUtterance(textToRead);
     u.lang = 'en-US'; 
     u.rate = 0.85; 
@@ -439,9 +463,9 @@ function renderExercise() {
   if (ex.type === 'Listening') {
     html += `<div class="mb-6 p-6 bg-indigo-50/70 border border-indigo-100 rounded-2xl flex flex-col items-center justify-center">
         <button onclick="playCurrentAnswer()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-8 py-4 rounded-2xl flex items-center gap-3 shadow-lg transition-all transform hover:scale-105 active:scale-95">
-          <span class="text-2xl">🔊</span> Escuchar Audio
+          <span class="text-2xl">🔊</span> Escuchar Oración Completa
         </button>
-        <p class="text-xs font-bold text-indigo-400 mt-3">Haz clic para escuchar la pronunciación correcta en inglés</p>
+        <p class="text-xs font-bold text-indigo-400 mt-3">Haz clic para escuchar la pronunciación en inglés</p>
       </div>`;
   }
 
